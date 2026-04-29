@@ -37,8 +37,6 @@
 @section('body_data', $layoutHelper->makeBodyData())
 
 @section('body')
-    <x-accessibility-widget />
-    <x-ai-chat-bot />
     <div class="wrapper">
 
         {{-- Preloader Animation (fullscreen mode) --}}

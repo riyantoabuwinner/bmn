@@ -70,6 +70,7 @@ body.acc-no-animations *:after {
     cursor: pointer;
     transition: transform 0.2s;
     border: 3px solid white !important;
+    pointer-events: auto !important;
 }
 .acc-widget-btn:hover {
     transform: scale(1.1);

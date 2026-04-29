@@ -73,9 +73,6 @@
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
 
-    {{-- Accessibility & App Assets --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
 
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
@@ -143,7 +140,12 @@
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
 
+    {{-- Global Widgets --}}
     <x-accessibility-widget />
+    <x-ai-chat-bot />
+
+    {{-- App Assets at the end for proper JS initialization --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </body>
 
