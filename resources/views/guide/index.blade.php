@@ -39,13 +39,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#rkbmn" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-calendar-check mr-2"></i> 6. Perencanaan (RKBMN)
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#qr-code" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-qrcode mr-2"></i> 6. Penggunaan QR Code
+                            <i class="fas fa-qrcode mr-2"></i> 7. Penggunaan QR Code
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#update" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-sync-alt mr-2"></i> 7. Pembaruan Sistem
+                            <i class="fas fa-sync-alt mr-2"></i> 8. Pembaruan Sistem
                         </a>
                     </li>
                 </ul>
@@ -224,11 +229,78 @@
                 </div>
             </div>
 
-            <!-- 7. Update Sistem -->
+            <!-- RKBMN -->
+            <div class="tab-pane fade" id="rkbmn">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">5. Perencanaan (RKBMN)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Modul RKBMN digunakan untuk merencanakan kebutuhan aset di masa mendatang secara sistematis.</p>
+                        
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/rkbmn_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="RKBMN UI">
+                            <p class="small text-muted mt-2">Gambar 5.1: Dashboard Perencanaan (RKBMN)</p>
+                        </div>
+
+                        <div class="accordion" id="guideRKBMN">
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepProcurement">
+                                    <h6 class="mb-0">1. Usulan Pengadaan</h6>
+                                </div>
+                                <div id="stepProcurement" class="collapse show" data-parent="#guideRKBMN">
+                                    <div class="card-body">
+                                        <p>Gunakan ini untuk mengajukan pembelian aset baru.</p>
+                                        <ol>
+                                            <li>Menu: <strong>PERENCANAAN (RKBMN) > Usulan Pengadaan</strong>.</li>
+                                            <li>Klik <strong>"Tambah Usulan"</strong>.</li>
+                                            <li>Pilih <strong>Kategori Barang</strong> (misal: Laptop, Meja, dll).</li>
+                                            <li>Masukkan <strong>Jumlah</strong> dan <strong>Estimasi Biaya</strong>.</li>
+                                            <li>Berikan alasan kebutuhan yang kuat untuk verifikasi pimpinan.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaintenance">
+                                    <h6 class="mb-0">2. Usulan Pemeliharaan</h6>
+                                </div>
+                                <div id="stepMaintenance" class="collapse" data-parent="#guideRKBMN">
+                                    <div class="card-body">
+                                        <p>Untuk mengajukan biaya perbaikan aset yang sudah ada.</p>
+                                        <ol>
+                                            <li>Menu: <strong>Usulan Pemeliharaan</strong>.</li>
+                                            <li>Klik <strong>"Pilih Aset"</strong> dari daftar yang sudah ada di sistem.</li>
+                                            <li>Masukkan jenis pemeliharaan (Rutin/Berat) dan estimasi biayanya.</li>
+                                            <li>Klik Simpan untuk mengirim usulan ke pusat.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepAction">
+                                    <h6 class="mb-0">3. Usulan Pemanfaatan & Penghapusan</h6>
+                                </div>
+                                <div id="stepAction" class="collapse" data-parent="#guideRKBMN">
+                                    <div class="card-body">
+                                        <p>Gunakan modul ini untuk merencanakan aset yang akan disewakan (Pemanfaatan) atau aset yang sudah rusak total dan ingin dikeluarkan dari daftar (Penghapusan).</p>
+                                        <ul>
+                                            <li><strong>Pemanfaatan:</strong> Memaksimalkan potensi aset untuk PNBP.</li>
+                                            <li><strong>Penghapusan:</strong> Membersihkan daftar aset dari barang yang sudah tidak memiliki nilai ekonomis/fisik.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 8. Update Sistem -->
             <div class="tab-pane fade" id="update">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">7. Pembaruan Sistem (System Update)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">8. Pembaruan Sistem (System Update)</h3>
                     </div>
                     <div class="card-body">
                         <p>Menjaga aplikasi tetap mutakhir dengan satu klik.</p>
