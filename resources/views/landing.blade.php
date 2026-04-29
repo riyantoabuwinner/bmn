@@ -926,9 +926,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init({ duration: 800, once: true });</script>
     <!-- AI Assistant Chat Bot Bubble -->
-    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: linear-gradient(135deg, #4338ca, #7C3AED); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 10px 30px rgba(67, 56, 202, 0.4); z-index: 9999; transition: 0.3s; border: 2px solid rgba(255,255,255,0.2);">
+    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); z-index: 9999; transition: 0.3s; border: 3px solid white;">
         <i class="fas fa-robot"></i>
-        <div style="position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
+        <div style="position: absolute; top: -2px; right: -2px; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
     </div>
 
     <!-- AI Chat Window -->

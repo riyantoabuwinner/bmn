@@ -61,14 +61,15 @@ body.acc-no-animations *:after {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #2563eb;
+    background-color: #10b981;
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     transition: transform 0.2s;
+    border: 3px solid white;
 }
 .acc-widget-btn:hover {
     transform: scale(1.1);
