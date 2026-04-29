@@ -399,6 +399,28 @@
             50% { transform: translate(-50%, -50%) translateZ(10px) scale(1.1); opacity: 0.4; }
         }
 
+        /* Force Accessibility Button Position */
+        .acc-widget-btn {
+            position: fixed !important;
+            bottom: 90px !important;
+            right: 20px !important;
+            width: 50px !important;
+            height: 50px !important;
+            background-color: #10b981 !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            z-index: 10001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        }
+        .acc-menu {
+            bottom: 150px !important;
+            z-index: 10002 !important;
+        }
+
         /* Nav Accessibility Group */
         .nav-accessibility-group {
             display: flex;
