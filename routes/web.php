@@ -14,6 +14,7 @@ use App\Http\Controllers\AssetDeletionController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SystemUpdateController;
+use App\Http\Controllers\UserGuideController;
 use App\Http\Controllers\AssetPspController;
 use App\Http\Controllers\AssetUtilizationController;
 use App\Http\Controllers\AssetTransferController;
@@ -164,6 +165,9 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureUserIsApproved
         Route::get('system/update', [SystemUpdateController::class, 'index'])->name('system.update.index');
         Route::post('system/update/check', [SystemUpdateController::class, 'check'])->name('system.update.check');
         Route::post('system/update/apply', [SystemUpdateController::class, 'apply'])->name('system.update.apply');
+
+        // User Guide
+        Route::get('guide', [UserGuideController::class, 'index'])->name('guide.index');
 
         // Activity Logs
         Route::get('logs', [ActivityLogController::class , 'index'])->name('logs.index');

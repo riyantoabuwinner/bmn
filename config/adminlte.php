@@ -538,6 +538,12 @@ return [
             'icon' => 'fas fa-fw fa-history',
             'role' => ['superadmin', 'admin', 'admin_rektorat', 'operator_fakultas'],
         ],
+        [
+            'text' => 'Panduan User',
+            'route' => 'guide.index',
+            'icon' => 'fas fa-fw fa-book-reader',
+            'role' => ['superadmin', 'admin', 'admin_rektorat', 'operator_fakultas', 'staff', 'user'],
+        ],
     ],
 
     /*
