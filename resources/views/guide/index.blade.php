@@ -79,7 +79,7 @@
                         <h3 class="card-title font-weight-bold text-primary">1. Memulai & Dashboard</h3>
                     </div>
                     <div class="card-body">
-                        <p>Selamat datang di sistem manajemen BMN. Setelah Anda login, Anda akan disuguhkan halaman Dashboard yang memberikan ringkasan kondisi aset secara real-time.</p>
+                        <p>Halaman utama (Dashboard) adalah ringkasan seluruh kondisi BMN Anda. Pastikan Anda memahami setiap angka yang muncul.</p>
                         
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/dashboard.png') }}" class="img-fluid rounded shadow-sm border" alt="Dashboard View">
@@ -87,11 +87,14 @@
                         </div>
 
                         <h6><strong>Langkah Memahami Dashboard:</strong></h6>
-                        <ol>
-                            <li><strong>Widget Statistik:</strong> Di bagian atas, Anda dapat melihat total Aset Tetap, Aset Lancar, dan total nilai perolehan.</li>
-                            <li><strong>Grafik Kondisi:</strong> Lingkaran grafik menunjukkan perbandingan aset dalam kondisi Baik, Rusak Ringan, dan Rusak Berat.</li>
-                            <li><strong>Aktivitas Terbaru:</strong> Di bagian kanan, terdapat log aktivitas siapa saja yang melakukan perubahan data terakhir.</li>
+                        <ol class="small">
+                            <li><strong>Widget Statistik:</strong> Klik angka pada widget untuk langsung menuju daftar aset terkait.</li>
+                            <li><strong>Grafik Kondisi:</strong> Arahkan kursor ke grafik untuk melihat jumlah detail aset berdasarkan kondisi fisik (Baik/Rusak).</li>
+                            <li><strong>Log Aktivitas:</strong> Gunakan ini untuk memantau siapa yang baru saja mengubah data atau mengimport aset.</li>
                         </ol>
+                    </div>
+                    <div class="card-footer bg-light border-top">
+                        <small class="text-info"><i class="fas fa-lightbulb mr-1"></i> <strong>Pro Tip:</strong> Dashboard diupdate secara real-time setiap kali ada transaksi baru.</small>
                     </div>
                 </div>
             </div>
@@ -103,27 +106,39 @@
                         <h3 class="card-title font-weight-bold text-primary">2. Pengaturan Master Data</h3>
                     </div>
                     <div class="card-body">
-                        <p>Sebelum menginput aset, Anda harus memastikan data master sudah terisi dengan benar.</p>
+                        <p>Jangan menginput aset sebelum Master Data terisi. Ini adalah urutan yang wajib diikuti:</p>
                         
-                        <div class="alert alert-warning py-2 mb-4">
-                            <small><i class="fas fa-exclamation-triangle mr-1"></i> Penting: Master Data adalah fondasi sistem. Kesalahan input di sini akan mempengaruhi laporan akhir.</small>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded text-center mb-3">
+                                    <i class="fas fa-building fa-2x text-primary mb-2"></i>
+                                    <h6>1. Satuan Kerja</h6>
+                                    <p class="xsmall text-muted">Daftarkan unit, fakultas, atau biro Anda.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded text-center mb-3">
+                                    <i class="fas fa-tags fa-2x text-success mb-2"></i>
+                                    <h6>2. Jenis Aset</h6>
+                                    <p class="xsmall text-muted">Kategorikan barang sesuai standar akuntansi.</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 border rounded text-center mb-3">
+                                    <i class="fas fa-door-open fa-2x text-warning mb-2"></i>
+                                    <h6>3. Lokasi Ruang</h6>
+                                    <p class="xsmall text-muted">Tentukan titik fisik keberadaan barang.</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <h6><strong>Langkah-Langkah:</strong></h6>
-                        <ul>
-                            <li class="mb-3">
-                                <strong>Satuan Kerja (Units):</strong>
-                                <p class="small text-muted">Menu: <code>Master Data > Satuan Kerja</code>. Tambahkan unit kerja (Fakultas/Biro/Lembaga) yang ada di instansi Anda.</p>
-                            </li>
-                            <li class="mb-3">
-                                <strong>Kategori Aset:</strong>
-                                <p class="small text-muted">Menu: <code>Master Data > Jenis Aset Tetap</code>. Pastikan kategori sesuai dengan standar SIMAN/Sakti (Tanah, Peralatan, Gedung, dll).</p>
-                            </li>
-                            <li class="mb-3">
-                                <strong>Lokasi Ruang:</strong>
-                                <p class="small text-muted">Menu: <code>Master Data > Lokasi Ruang</code>. Daftarkan nama ruangan (Gedung A Lantai 1, Lab Komputer, dll).</p>
-                            </li>
-                        </ul>
+                        <h6><strong>Detail Cara Input:</strong></h6>
+                        <ol class="small">
+                            <li>Buka menu <strong>Master Data</strong> > Pilih kategori (misal: Lokasi Ruang).</li>
+                            <li>Klik <strong>"Tambah Baru"</strong>.</li>
+                            <li>Isi <strong>Nama Lokasi</strong> (misal: Ruang Lab Komputer 1) dan <strong>Kapasitas</strong> jika ada.</li>
+                            <li>Klik Simpan. Sekarang lokasi ini bisa dipilih saat menambah aset.</li>
+                        </ol>
                     </div>
                 </div>
             </div>
@@ -135,25 +150,27 @@
                         <h3 class="card-title font-weight-bold text-primary">3. Manajemen Aset Tetap</h3>
                     </div>
                     <div class="card-body">
-                        <p>Modul ini adalah jantung dari aplikasi untuk mencatat semua Barang Milik Negara.</p>
+                        <p>Mencatat aset secara manual satu-persatu.</p>
                         
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/header.png') }}" class="img-fluid rounded shadow-sm border" alt="Asset Header">
                             <p class="small text-muted mt-2">Gambar 3.1: Menu Akses Aset Tetap</p>
                         </div>
 
-                        <h6><strong>Cara Menambah Aset Secara Manual:</strong></h6>
-                        <ol>
-                            <li>Buka menu <strong>Inventarisasi > Aset Tetap</strong>.</li>
-                            <li>Klik tombol biru <strong>"Tambah Aset"</strong> di pojok kanan atas.</li>
-                            <li>Isi form yang muncul:
+                        <h6><strong>Langkah Detil Tambah Manual:</strong></h6>
+                        <ol class="small">
+                            <li>Menu <strong>Inventarisasi > Aset Tetap</strong>.</li>
+                            <li>Klik <strong>"Tambah Aset"</strong>.</li>
+                            <li><strong>Form Detail Barang:</strong>
                                 <ul>
-                                    <li><strong>Kode Barang:</strong> 10 digit kode akun barang.</li>
-                                    <li><strong>NUP:</strong> Nomor Urut Pendaftaran.</li>
-                                    <li><strong>Kondisi:</strong> Pilih status fisik saat ini.</li>
+                                    <li><strong>Kode Barang:</strong> Harus 10 digit (Contoh: 3020101002).</li>
+                                    <li><strong>NUP:</strong> Nomor Urut. Pastikan tidak ganda untuk kode barang yang sama.</li>
+                                    <li><strong>Tgl Perolehan:</strong> Tanggal saat barang dibeli/diterima.</li>
+                                    <li><strong>Nilai Perolehan:</strong> Masukkan angka tanpa titik/koma (Contoh: 15000000).</li>
                                 </ul>
                             </li>
-                            <li>Klik <strong>Simpan</strong>. Sistem akan otomatis membuat entri baru dan menghasilkan QR Code unik.</li>
+                            <li><strong>Upload Foto:</strong> Klik area foto untuk mengambil gambar aset lewat kamera atau galeri.</li>
+                            <li>Klik <strong>"Simpan Aset"</strong>.</li>
                         </ol>
                     </div>
                 </div>
@@ -162,30 +179,29 @@
             <!-- 4. Panduan Import Massal -->
             <div class="tab-pane fade" id="import-detail">
                 <div class="card border-0">
-                    <div class="card-header bg-white text-dark">
+                    <div class="card-header bg-white">
                         <h3 class="card-title font-weight-bold text-primary">4. Panduan Import Massal (Skala Besar)</h3>
                     </div>
                     <div class="card-body">
-                        <p>Fitur ini memungkinkan Anda memasukkan ribuan data dalam hitungan menit.</p>
+                        <p>Solusi untuk migrasi data dari sistem lama atau dari SIMAN/Sakti.</p>
 
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/import_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="Import UI">
                             <p class="small text-muted mt-2">Gambar 4.1: Antarmuka Proses Import Data</p>
                         </div>
 
-                        <h6><strong>Langkah Detail Import (> 100.000 data):</strong></h6>
-                        <ol>
-                            <li>Gunakan tombol <strong>"Import Excel/CSV"</strong>.</li>
-                            <li><strong>Penting:</strong> Untuk data sangat besar, gunakan format <strong>CSV</strong>.</li>
-                            <li>Klik <strong>"Choose File"</strong> dan pilih file Anda.</li>
-                            <li>Klik <strong>"Upload & Import"</strong>.</li>
-                            <li>Sistem akan masuk ke tahap <strong>"Counting"</strong> (menghitung data), lalu <strong>"Processing"</strong>.</li>
-                            <li>Perhatikan Progress Bar. Anda bisa memantau pertambahan baris data yang berhasil masuk secara real-time.</li>
+                        <h6><strong>SOP Import Aman:</strong></h6>
+                        <ol class="small">
+                            <li>Klik <strong>"Import Excel/CSV"</strong>.</li>
+                            <li><strong>Persiapan File:</strong> Gunakan <strong>CSV (Comma Separated Values)</strong> jika data lebih dari 50.000 baris untuk menghindari timeout server.</li>
+                            <li><strong>Urutan Kolom:</strong> Pastikan urutan kolom sesuai dengan template (Kode Barang, NUP, Nama, dll).</li>
+                            <li>Klik <strong>"Proses Import"</strong>.</li>
+                            <li><strong>Tahap Pengecekan:</strong> Tunggu status "Counting". Sistem sedang menghitung jumlah baris data Anda.</li>
+                            <li><strong>Tahap Eksekusi:</strong> Setelah muncul progress bar biru, biarkan halaman tetap terbuka. Anda akan melihat angka "Berhasil: X, Gagal: Y" bertambah secara real-time.</li>
                         </ol>
-                        
-                        <div class="p-3 bg-light border-left border-info rounded">
-                            <small><strong>Note:</strong> Jika terjadi error "Gagal Menghubungi Server", kemungkinan file terlalu besar. Pecahlah file menjadi maksimal 50.000 baris per unggahan.</small>
-                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top">
+                        <small class="text-danger"><i class="fas fa-exclamation-circle mr-1"></i> <strong>Troubleshooting:</strong> Jika progress bar berhenti lama, klik tombol <strong>"Reset Tampilan Import"</strong> lalu unggah ulang file Anda.</small>
                     </div>
                 </div>
             </div>
@@ -197,43 +213,26 @@
                         <h3 class="card-title font-weight-bold text-primary">5. Aset Lancar (Persediaan)</h3>
                     </div>
                     <div class="card-body">
-                        <p class="small text-muted">Digunakan untuk mengelola stok barang habis pakai (ATK, Cairan Pembersih, dll).</p>
-                        
-                        <div class="accordion" id="guideAsetLancar">
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockIn">
-                                    <h6 class="mb-0">A. Mencatat Barang Masuk (Pengadaan)</h6>
-                                </div>
-                                <div id="stepStockIn" class="collapse show" data-parent="#guideAsetLancar">
-                                    <div class="card-body">
-                                        <ol class="small">
-                                            <li>Buka menu <strong>PENGELOLAAN ASET LANCAR > Transaksi Persediaan</strong>.</li>
-                                            <li>Klik tombol hijau <strong>"Tambah Transaksi"</strong>.</li>
-                                            <li>Pilih Jenis Transaksi: <span class="badge badge-success">Masuk</span>.</li>
-                                            <li>Pilih <strong>Nama Barang</strong> dari dropdown. Jika barang belum ada, daftarkan dulu di Master Data.</li>
-                                            <li>Masukkan <strong>Jumlah (Quantity)</strong> dan <strong>Harga Satuan</strong>.</li>
-                                            <li>Klik <strong>"Simpan Transaksi"</strong>. Stok di tabel utama akan bertambah otomatis.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockOut">
-                                    <h6 class="mb-0">B. Mencatat Barang Keluar (Pemakaian)</h6>
-                                </div>
-                                <div id="stepStockOut" class="collapse" data-parent="#guideAsetLancar">
-                                    <div class="card-body">
-                                        <ol class="small">
-                                            <li>Sama seperti langkah sebelumnya, pilih tombol <strong>"Tambah Transaksi"</strong>.</li>
-                                            <li>Pilih Jenis Transaksi: <span class="badge badge-danger">Keluar</span>.</li>
-                                            <li>Pilih barang yang diambil. Pastikan jumlahnya tidak melebihi stok yang ada.</li>
-                                            <li>Masukkan <strong>Nama Penerima</strong> atau Unit Kerja pemakai.</li>
-                                            <li>Klik <strong>Simpan</strong>. Stok akan berkurang seketika.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
+                        <p>Mengelola pergerakan stok barang habis pakai.</p>
+
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/aset_lancar_detail.png') }}" class="img-fluid rounded shadow-sm border" alt="Current Asset Form">
+                            <p class="small text-muted mt-2">Gambar 5.1: Form Transaksi Stok Persediaan</p>
                         </div>
+
+                        <h6><strong>Langkah Kelola Stok:</strong></h6>
+                        <ol class="small">
+                            <li>Buka menu <strong>Transaksi Persediaan</strong>.</li>
+                            <li>Klik <strong>"Tambah Transaksi"</strong>.</li>
+                            <li><strong>Jenis Transaksi:</strong>
+                                <ul>
+                                    <li><strong>Masuk:</strong> Untuk stok baru (pembelian/hibah). Stok akan bertambah.</li>
+                                    <li><strong>Keluar:</strong> Untuk pemakaian (diambil pegawai). Stok akan berkurang.</li>
+                                </ul>
+                            </li>
+                            <li>Pilih <strong>Barang</strong> > Isi <strong>Jumlah</strong> > Isi <strong>Keterangan</strong> (misal: "Untuk kebutuhan ATK Fakultas").</li>
+                            <li>Klik <strong>Simpan</strong>.</li>
+                        </ol>
                     </div>
                 </div>
             </div>
@@ -242,115 +241,48 @@
             <div class="tab-pane fade" id="management">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">6. Pengelolaan Aset Tetap</h3>
+                        <h3 class="card-title font-weight-bold text-primary">6. Pengelolaan Aset Tetap (Operasional)</h3>
                     </div>
                     <div class="card-body">
-                        <p>Modul ini digunakan untuk mengelola siklus operasional aset setelah terdaftar di sistem.</p>
+                        <p>Setelah aset terdaftar, Anda harus mengelola status dan perawatannya.</p>
                         
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/management_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="Management UI">
-                            <p class="small text-muted mt-2">Gambar 6.1: Antarmuka Pengelolaan Aset Tetap</p>
+                            <p class="small text-muted mt-2">Gambar 6.1: Antarmuka Operasional Aset</p>
                         </div>
 
                         <div class="accordion" id="guideManagement">
-                            <!-- A. PSP -->
+                            <!-- PSP -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepPSP">
-                                    <h6 class="mb-0">A. Penetapan Status Penggunaan (PSP)</h6>
+                                    <h6 class="mb-0"><i class="fas fa-file-contract text-primary mr-2"></i> A. Penetapan Status (PSP)</h6>
                                 </div>
                                 <div id="stepPSP" class="collapse show" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <p class="small text-muted">Tujuannya untuk memberikan legalitas penggunaan aset di bawah unit kerja tertentu.</p>
+                                        <p class="small">Proses melegalkan penggunaan aset secara administrasi negara.</p>
                                         <ol class="small">
-                                            <li>Buka menu <strong>PENGELOLAAN ASET TETAP > Penetapan Status (PSP)</strong>.</li>
-                                            <li>Anda akan melihat daftar aset yang <strong>"Belum PSP"</strong>.</li>
-                                            <li>Gunakan kotak <strong>Search</strong> untuk mencari aset berdasarkan Nama atau NUP.</li>
-                                            <li>Klik tombol biru <strong>"Proses PSP"</strong> di baris aset yang diinginkan.</li>
-                                            <li>Pada form yang muncul, masukkan <strong>Nomor SK PSP</strong> dan <strong>Tanggal SK</strong> sesuai dokumen fisik.</li>
-                                            <li>Klik area <strong>Upload SK</strong> dan pilih file PDF dokumen SK tersebut.</li>
-                                            <li>Klik <strong>"Simpan Data PSP"</strong>. Status aset akan otomatis berubah menjadi <strong>Terdaftar PSP</strong>.</li>
+                                            <li>Klik menu <strong>PSP</strong>. Lihat daftar barang yang belum berstatus PSP.</li>
+                                            <li>Klik <strong>"Proses PSP"</strong>.</li>
+                                            <li>Isi <strong>No SK</strong>, <strong>Tgl SK</strong>, dan <strong>Pejabat Penandatangan</strong>.</li>
+                                            <li>Wajib unggah file SK asli (PDF).</li>
+                                            <li>Simpan. Status di database akan berubah menjadi "PSP".</li>
                                         </ol>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- B. Distribusi -->
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepDist">
-                                    <h6 class="mb-0">B. Distribusi Aset & BAST</h6>
-                                </div>
-                                <div id="stepDist" class="collapse" data-parent="#guideManagement">
-                                    <div class="card-body">
-                                        <p class="small text-muted">Digunakan saat barang dipindahkan ke ruangan lain atau diserahkan ke pegawai.</p>
-                                        <ol class="small">
-                                            <li><strong>Distribusi:</strong> Menu <code>Distribusi Aset</code> > Klik <code>Tambah Distribusi</code> > Pilih Aset > Pilih <strong>Ruangan Tujuan</strong> > Simpan.</li>
-                                            <li><strong>Pemegang Aset (BAST):</strong> Menu <code>Pemegang Aset (BAST)</code>.</li>
-                                            <li>Klik tombol <strong>"Serah Terima"</strong>.</li>
-                                            <li>Pilih <strong>Nama Pegawai</strong> dari daftar (User) dan pilih aset yang diserahkan.</li>
-                                            <li>Setelah simpan, klik ikon printer <i class="fas fa-print"></i> untuk <strong>Cetak Berita Acara (BAST)</strong>.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- C. Peminjaman -->
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepBorrow">
-                                    <h6 class="mb-0">C. Peminjaman & Pemanfaatan Aset</h6>
-                                </div>
-                                <div id="stepBorrow" class="collapse" data-parent="#guideManagement">
-                                    <div class="card-body">
-                                        <h6 class="font-weight-bold small text-primary">Peminjaman (Internal):</h6>
-                                        <ol class="small mb-3">
-                                            <li>Pilih menu <strong>Peminjaman Aset</strong>.</li>
-                                            <li>Klik <strong>"Buat Peminjaman"</strong>. Isi <strong>Nama Peminjam</strong> dan <strong>Estimasi Tanggal Kembali</strong>.</li>
-                                            <li>Sistem akan menandai aset tersebut sedang <strong>"Dipinjam"</strong> sehingga tidak bisa dipinjam oleh orang lain.</li>
-                                        </ol>
-                                        <h6 class="font-weight-bold small text-success">Pemanfaatan (Mitra):</h6>
-                                        <ol class="small">
-                                            <li>Pilih menu <strong>Pemanfaatan Aset</strong>.</li>
-                                            <li>Pilih aset (misal: Aula/Lahan).</li>
-                                            <li>Input data <strong>Nomor Perjanjian/Kontrak</strong> dan <strong>Nilai Sewa</strong>.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- D. Maintenance -->
+                            <!-- Maintenance -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaint">
-                                    <h6 class="mb-0">D. Maintenance & Evaluasi Berkala</h6>
+                                    <h6 class="mb-0"><i class="fas fa-wrench text-danger mr-2"></i> B. Maintenance & Riwayat Servis</h6>
                                 </div>
                                 <div id="stepMaint" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <h6 class="font-weight-bold small text-danger">Maintenance (Perbaikan):</h6>
-                                        <ol class="small mb-3">
-                                            <li>Menu <strong>Maintenance Aset</strong> > Klik <strong>"Input Riwayat Servis"</strong>.</li>
-                                            <li>Pilih Aset > Masukkan <strong>Tgl Servis</strong>, <strong>Biaya</strong>, dan <strong>Uraian Perbaikan</strong>.</li>
-                                        </ol>
-                                        <h6 class="font-weight-bold small text-warning">Evaluasi (Audit):</h6>
+                                        <p class="small">Mencatat biaya perbaikan agar riwayat aset terlacak.</p>
                                         <ol class="small">
-                                            <li>Menu <strong>Evaluasi Aset Berkala</strong>.</li>
-                                            <li>Klik <strong>"Mulai Evaluasi"</strong>.</li>
-                                            <li>Pilih Kondisi saat ini (Baik/RR/RB) dan <strong>Upload Foto Fisik</strong> terbaru sebagai bukti.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- E. Penghapusan -->
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepRemove">
-                                    <h6 class="mb-0">E. Pemindahtanganan & Penghapusan</h6>
-                                </div>
-                                <div id="stepRemove" class="collapse" data-parent="#guideManagement">
-                                    <div class="card-body">
-                                        <p class="small text-muted">Proses final untuk aset yang sudah tidak digunakan lagi.</p>
-                                        <ol class="small">
-                                            <li>Buka menu <strong>Penghapusan Aset</strong>.</li>
-                                            <li>Cari aset yang ingin dihapus > Klik <strong>"Ajukan Penghapusan"</strong>.</li>
-                                            <li>Masukkan alasan (Rusak Total/Hilang/Hibah).</li>
-                                            <li>Setelah disetujui, aset akan berpindah ke daftar <strong>Arsip/Aset Non-Aktif</strong>.</li>
+                                            <li>Pilih menu <strong>Maintenance Aset</strong>.</li>
+                                            <li>Cari aset (misal: AC Lantai 2). Klik <strong>"Tambah Riwayat Servis"</strong>.</li>
+                                            <li>Isi <strong>Tgl Servis</strong>, <strong>Biaya</strong>, dan <strong>Vendor/Tukang</strong> yang mengerjakan.</li>
+                                            <li>Klik Simpan. Riwayat ini akan muncul saat Anda mencetak detail aset.</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -360,125 +292,75 @@
                 </div>
             </div>
 
-            <!-- 7. Perencanaan (RKBMN) -->
+            <!-- 7. RKBMN -->
             <div class="tab-pane fade" id="rkbmn">
                 <div class="card border-0">
                     <div class="card-header bg-white">
                         <h3 class="card-title font-weight-bold text-primary">7. Perencanaan (RKBMN)</h3>
                     </div>
                     <div class="card-body">
-                        <p>Modul RKBMN digunakan untuk merencanakan kebutuhan aset di masa mendatang secara sistematis.</p>
+                        <p>Mengajukan usulan pengadaan atau pemeliharaan untuk anggaran tahun depan.</p>
                         
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/rkbmn_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="RKBMN UI">
                             <p class="small text-muted mt-2">Gambar 7.1: Dashboard Perencanaan (RKBMN)</p>
                         </div>
 
-                        <div class="accordion" id="guideRKBMN">
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepProcurement">
-                                    <h6 class="mb-0">1. Usulan Pengadaan</h6>
-                                </div>
-                                <div id="stepProcurement" class="collapse show" data-parent="#guideRKBMN">
-                                    <div class="card-body">
-                                        <p>Gunakan ini untuk mengajukan pembelian aset baru.</p>
-                                        <ol>
-                                            <li>Menu: <strong>PERENCANAAN (RKBMN) > Usulan Pengadaan</strong>.</li>
-                                            <li>Klik <strong>"Tambah Usulan"</strong>.</li>
-                                            <li>Pilih <strong>Kategori Barang</strong> (misal: Laptop, Meja, dll).</li>
-                                            <li>Masukkan <strong>Jumlah</strong> dan <strong>Estimasi Biaya</strong>.</li>
-                                            <li>Berikan alasan kebutuhan yang kuat untuk verifikasi pimpinan.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaintenance">
-                                    <h6 class="mb-0">2. Usulan Pemeliharaan</h6>
-                                </div>
-                                <div id="stepMaintenance" class="collapse" data-parent="#guideRKBMN">
-                                    <div class="card-body">
-                                        <p>Untuk mengajukan biaya perbaikan aset yang sudah ada.</p>
-                                        <ol>
-                                            <li>Menu: <strong>Usulan Pemeliharaan</strong>.</li>
-                                            <li>Klik <strong>"Pilih Aset"</strong> dari daftar yang sudah ada di sistem.</li>
-                                            <li>Masukkan jenis pemeliharaan (Rutin/Berat) dan estimasi biayanya.</li>
-                                            <li>Klik Simpan untuk mengirim usulan ke pusat.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h6><strong>Langkah Pengajuan Usulan:</strong></h6>
+                        <ol class="small">
+                            <li>Buka menu <strong>PERENCANAAN (RKBMN) > Usulan Pengadaan</strong>.</li>
+                            <li>Klik <strong>"Buat Usulan Baru"</strong>.</li>
+                            <li>Pilih <strong>Kategori Barang</strong> yang dibutuhkan.</li>
+                            <li>Isi <strong>Jumlah</strong>, <strong>Harga Satuan</strong>, dan <strong>Alasan Kebutuhan</strong>.</li>
+                            <li>Klik <strong>Kirim Usulan</strong>. Usulan akan masuk ke antrean verifikasi Super Admin.</li>
+                        </ol>
                     </div>
                 </div>
             </div>
 
-            <!-- 8. Pengawasan (WASDAL) -->
+            <!-- 8. WASDAL -->
             <div class="tab-pane fade" id="wasdal">
                 <div class="card border-0">
                     <div class="card-header bg-white">
                         <h3 class="card-title font-weight-bold text-primary">8. Pengawasan (WASDAL)</h3>
                     </div>
                     <div class="card-body">
-                        <p class="small text-muted">Memastikan penggunaan aset efisien dan sesuai dengan regulasi.</p>
-                        
-                        <div class="accordion" id="guideWasdal">
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepReportWasdal">
-                                    <h6 class="mb-0">A. Pelaporan Wasdal</h6>
-                                </div>
-                                <div id="stepReportWasdal" class="collapse show" data-parent="#guideWasdal">
-                                    <div class="card-body">
-                                        <ol class="small">
-                                            <li>Menu: <strong>PENGAWASAN (WASDAL) > Pelaporan Wasdal</strong>.</li>
-                                            <li>Klik <strong>"Buat Laporan Baru"</strong>.</li>
-                                            <li>Pilih periode pelaporan (Semester/Tahunan).</li>
-                                            <li>Sistem akan menarik data PSP dan penggunaan aset secara otomatis.</li>
-                                            <li>Klik <strong>"Generate Laporan"</strong> dan unduh hasilnya untuk dikirim ke pengelola barang pusat.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMonitoring">
-                                    <h6 class="mb-0">B. Monitoring & Aset Idle</h6>
-                                </div>
-                                <div id="stepMonitoring" class="collapse" data-parent="#guideWasdal">
-                                    <div class="card-body">
-                                        <p class="small">Aset <strong>Idle</strong> adalah barang yang tersedia namun tidak digunakan oleh unit kerja.</p>
-                                        <ol class="small">
-                                            <li>Buka menu <strong>Monitoring & Idle</strong>.</li>
-                                            <li>Sistem menampilkan daftar barang dengan status <strong>"Tersedia"</strong> namun tidak ada riwayat distribusi/peminjaman dalam 6 bulan terakhir.</li>
-                                            <li>Anda dapat mengusulkan aset ini untuk dipindahtangankan ke unit lain yang lebih membutuhkan.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
+                        <p>Monitoring aset agar tidak ada barang yang terbengkalai (Idle).</p>
+
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/wasdal_detail.png') }}" class="img-fluid rounded shadow-sm border" alt="Wasdal Detail">
+                            <p class="small text-muted mt-2">Gambar 8.1: Antarmuka Monitoring & Pelaporan Wasdal</p>
                         </div>
+
+                        <h6><strong>SOP Monitoring & Pelaporan:</strong></h6>
+                        <ol class="small">
+                            <li><strong>Pelaporan:</strong> Menu <code>Pelaporan Wasdal</code> > Pilih tahun > Klik <code>Generate</code>. Sistem akan membuat laporan PDF siap cetak.</li>
+                            <li><strong>Monitoring Idle:</strong> Menu <code>Monitoring & Idle</code>. Jika ada barang bertanda merah, artinya barang tersebut ada di database tapi tidak pernah digunakan/dipinjam dalam waktu lama. Segera lakukan pengecekan fisik!</li>
+                        </ol>
                     </div>
                 </div>
             </div>
 
-            <!-- 9. Penggunaan QR Code -->
+            <!-- 9. QR Code -->
             <div class="tab-pane fade" id="qr-code">
                 <div class="card border-0">
-                    <div class="card-header bg-white text-dark">
+                    <div class="card-header bg-white">
                         <h3 class="card-title font-weight-bold text-primary">9. Penggunaan QR Code</h3>
                     </div>
                     <div class="card-body">
-                        <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
+                        <p>Memudahkan audit lapangan hanya dengan smartphone.</p>
 
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
                             <p class="small text-muted mt-2">Gambar 9.1: Proses Pemindaian QR Code Aset</p>
                         </div>
 
-                        <h6><strong>Langkah Audit Lapangan:</strong></h6>
-                        <ol>
-                            <li>Buka menu <strong>Scan QR / Cek Aset</strong> di HP atau Laptop.</li>
-                            <li>Izinkan akses kamera.</li>
-                            <li>Arahkan kamera ke label aset.</li>
-                            <li>Sistem akan langsung menampilkan informasi: Nama Aset, NUP, Lokasi, dan Kondisi Terakhir tanpa perlu mencari manual.</li>
+                        <h6><strong>Langkah Audit Cepat:</strong></h6>
+                        <ol class="small">
+                            <li>Tempelkan label QR Code pada aset fisik.</li>
+                            <li>Buka menu <strong>Scan QR</strong> pada aplikasi via HP.</li>
+                            <li>Arahkan kamera ke kode QR.</li>
+                            <li>Klik link yang muncul. Detail aset (Nama, Lokasi, Kondisi) akan langsung tampil di layar HP Anda tanpa perlu mengetik apapun.</li>
                         </ol>
                     </div>
                 </div>
@@ -491,16 +373,14 @@
                         <h3 class="card-title font-weight-bold text-primary">10. Pembaruan Sistem (System Update)</h3>
                     </div>
                     <div class="card-body">
-                        <p>Menjaga aplikasi tetap mutakhir dengan satu klik.</p>
-                        <ol>
-                            <li>Masuk ke menu <strong>PENGATURAN > Update Sistem</strong>.</li>
-                            <li>Klik <strong>"Cek Pembaruan"</strong>.</li>
-                            <li>Jika muncul teks <span class="badge badge-info">Terdapat X pembaruan tersedia</span>, barulah klik tombol hijau <strong>"Perbarui Sistem"</strong>.</li>
-                            <li>Sistem akan melakukan penarikan kode (git pull) secara aman.</li>
+                        <p>Menjamin sistem Anda selalu memiliki fitur terbaru dan keamanan yang ditingkatkan.</p>
+                        <ol class="small">
+                            <li>Masuk ke menu <strong>Update Sistem</strong>.</li>
+                            <li>Klik <strong>"Cek Pembaruan"</strong>. Tunggu indikator selesai berputar.</li>
+                            <li>Baca <strong>Log Perubahan</strong> untuk melihat fitur apa yang baru ditambahkan oleh pengembang.</li>
+                            <li>Jika ada update, klik tombol hijau <strong>"Perbarui Sistem"</strong>.</li>
+                            <li>Tunggu hingga muncul pesan <span class="text-success">"Sistem Berhasil Diperbarui"</span>. Halaman akan otomatis refresh.</li>
                         </ol>
-                        <div class="alert alert-danger py-2 mt-3">
-                            <small><i class="fas fa-exclamation-circle mr-1"></i> Jangan mematikan koneksi internet saat proses update sedang berjalan.</small>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -514,11 +394,12 @@
 <style>
     .guide-nav .nav-link {
         border-radius: 0;
-        padding: 15px 20px;
+        padding: 12px 15px;
         color: #495057;
         font-weight: 500;
         border-bottom: 1px solid rgba(0,0,0,.05);
         transition: all 0.3s;
+        font-size: 0.9rem;
     }
     .guide-nav .nav-link:hover {
         background-color: #f1f3f5;
@@ -534,7 +415,7 @@
         background: #fff;
         border-radius: 8px;
         min-height: 600px;
-        padding: 10px;
+        padding: 15px;
     }
     .card-header {
         border-bottom: 1px solid rgba(0,0,0,.05) !important;
@@ -553,6 +434,9 @@
     }
     .sticky-top {
         z-index: 1020;
+    }
+    .xsmall {
+        font-size: 0.75rem;
     }
 </style>
 @stop
