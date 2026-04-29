@@ -926,13 +926,13 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init({ duration: 800, once: true });</script>
     <!-- AI Assistant Chat Bot Bubble -->
-    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 30px; right: 30px; width: 65px; height: 65px; background: linear-gradient(135deg, #4338ca, #7C3AED); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 28px; cursor: pointer; box-shadow: 0 10px 30px rgba(67, 56, 202, 0.4); z-index: 9999; transition: 0.3s; border: 3px solid rgba(255,255,255,0.2);">
+    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: linear-gradient(135deg, #4338ca, #7C3AED); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 10px 30px rgba(67, 56, 202, 0.4); z-index: 9999; transition: 0.3s; border: 2px solid rgba(255,255,255,0.2);">
         <i class="fas fa-robot"></i>
-        <div style="position: absolute; top: 0; right: 0; width: 15px; height: 15px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
+        <div style="position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
     </div>
 
     <!-- AI Chat Window -->
-    <div id="ai-chat-window" style="position: fixed; bottom: 110px; right: 30px; width: 380px; height: 550px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: none; flex-direction: column; z-index: 9999; overflow: hidden; border: 1px solid rgba(255,255,255,0.5); animation: slideUp 0.4s ease;">
+    <div id="ai-chat-window" style="position: fixed; bottom: 85px; right: 20px; width: 380px; height: 550px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: none; flex-direction: column; z-index: 9999; overflow: hidden; border: 1px solid rgba(255,255,255,0.5); animation: slideUp 0.4s ease;">
         <!-- Chat Header -->
         <div style="background: linear-gradient(135deg, #1e1b4b, #4338ca); padding: 25px; color: white; display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 15px;">

@@ -297,5 +297,67 @@
     <script>
         AOS.init({ duration: 800, once: true });
     </script>
+    <!-- AI Assistant Chat Bot Bubble -->
+    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: linear-gradient(135deg, #4338ca, #7C3AED); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 10px 30px rgba(67, 56, 202, 0.4); z-index: 9999; transition: 0.3s; border: 2px solid rgba(255,255,255,0.2);">
+        <i class="fas fa-robot"></i>
+        <div style="position: absolute; top: 0; right: 0; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
+    </div>
+
+    <!-- AI Chat Window -->
+    <div id="ai-chat-window" style="position: fixed; bottom: 85px; right: 20px; width: 350px; height: 500px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: none; flex-direction: column; z-index: 9999; overflow: hidden; border: 1px solid rgba(255,255,255,0.5); animation: slideUp 0.4s ease;">
+        <div style="background: linear-gradient(135deg, #1e1b4b, #4338ca); padding: 20px; color: white; display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-robot" style="font-size: 20px;"></i>
+                <h4 style="margin: 0; font-size: 1rem;">BMN Core! AI</h4>
+            </div>
+            <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer;"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="chat-messages" style="flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #f8fafc;">
+            <div style="background: #eef2ff; padding: 10px 15px; border-radius: 15px 15px 15px 5px; align-self: flex-start; font-size: 0.85rem; color: #1e1b4b;">
+                Halo! Ada yang bisa saya bantu tentang modul ini?
+            </div>
+        </div>
+        <div style="padding: 15px; background: white; border-top: 1px solid #e2e8f0;">
+            <div style="display: flex; gap: 8px; background: #f1f5f9; padding: 8px; border-radius: 10px;">
+                <input type="text" id="user-input" placeholder="Tanya AI..." style="flex: 1; background: none; border: none; outline: none; font-size: 0.85rem;" onkeypress="if(event.key === 'Enter') sendMessage()">
+                <button onclick="sendMessage()" style="background: #4338ca; color: white; border: none; width: 35px; height: 35px; border-radius: 8px; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    </style>
+
+    <script>
+        function toggleChat() {
+            const win = document.getElementById('ai-chat-window');
+            win.style.display = win.style.display === 'none' ? 'flex' : 'none';
+        }
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const msg = input.value.trim();
+            if(!msg) return;
+            appendMessage('user', msg);
+            input.value = '';
+            setTimeout(() => {
+                const query = msg.toLowerCase();
+                let resp = "Saya adalah asisten AI BMN Core!. Anda bisa bertanya tentang Modul, Regulasi, atau Cara Penggunaan.";
+                if(query.includes('modul') || query.includes('fitur')) resp = "Modul yang tersedia: Master Data, Aset Tetap, Persediaan, RKBMN, Wasdal, dan Laporan.";
+                if(query.includes('regulasi')) resp = "Sistem ini patuh pada regulasi BMN terbaru dan standar integrasi SIMAN v2.";
+                appendMessage('ai', resp);
+            }, 700);
+        }
+        function appendMessage(sender, text) {
+            const container = document.getElementById('chat-messages');
+            const div = document.createElement('div');
+            div.style.cssText = sender === 'user' 
+                ? "background: #4338ca; color: white; padding: 10px 15px; border-radius: 15px 15px 5px 15px; align-self: flex-end; font-size: 0.85rem; max-width: 85%;"
+                : "background: #eef2ff; color: #1e1b4b; padding: 10px 15px; border-radius: 15px 15px 15px 5px; align-self: flex-start; font-size: 0.85rem; max-width: 85%; border: 1px solid #e0e7ff;";
+            div.innerHTML = text;
+            container.appendChild(div);
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
 </body>
 </html>

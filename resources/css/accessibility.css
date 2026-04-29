@@ -55,7 +55,7 @@ body.acc-no-animations *:after {
 /* Accessibility Widget Styles */
 .acc-widget-btn {
     position: fixed;
-    bottom: 20px;
+    bottom: 85px;
     right: 20px;
     z-index: 9999;
     width: 50px;
@@ -76,7 +76,7 @@ body.acc-no-animations *:after {
 
 .acc-menu {
     position: fixed;
-    bottom: 80px;
+    bottom: 145px;
     right: 20px;
     width: 320px;
     max-height: 80vh;
