@@ -39,18 +39,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#management" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-tasks mr-2"></i> 6. Pengelolaan Aset Tetap
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#rkbmn" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-calendar-check mr-2"></i> 6. Perencanaan (RKBMN)
+                            <i class="fas fa-calendar-check mr-2"></i> 7. Perencanaan (RKBMN)
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#qr-code" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-qrcode mr-2"></i> 7. Penggunaan QR Code
+                            <i class="fas fa-qrcode mr-2"></i> 8. Penggunaan QR Code
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#update" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-sync-alt mr-2"></i> 8. Pembaruan Sistem
+                            <i class="fas fa-sync-alt mr-2"></i> 9. Pembaruan Sistem
                         </a>
                     </li>
                 </ul>
@@ -204,43 +209,83 @@
                 </div>
             </div>
 
-            <!-- 6. QR Code -->
-            <div class="tab-pane fade" id="qr-code">
+            <!-- 6. Pengelolaan Aset Tetap -->
+            <div class="tab-pane fade" id="management">
                 <div class="card border-0">
-                    <div class="card-header bg-white text-dark">
-                        <h3 class="card-title font-weight-bold text-primary">6. Penggunaan QR Code</h3>
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">6. Pengelolaan Aset Tetap</h3>
                     </div>
                     <div class="card-body">
-                        <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
-
+                        <p>Modul ini digunakan untuk mengelola siklus operasional aset setelah terdaftar di sistem.</p>
+                        
                         <div class="text-center mb-4">
-                            <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
-                            <p class="small text-muted mt-2">Gambar 6.1: Proses Pemindaian QR Code Aset</p>
+                            <img src="{{ asset('img/guide/management_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="Management UI">
+                            <p class="small text-muted mt-2">Gambar 6.1: Antarmuka Pengelolaan Aset Tetap</p>
                         </div>
 
-                        <h6><strong>Langkah Audit Lapangan:</strong></h6>
-                        <ol>
-                            <li>Buka menu <strong>Scan QR / Cek Aset</strong> di HP atau Laptop.</li>
-                            <li>Izinkan akses kamera.</li>
-                            <li>Arahkan kamera ke label aset.</li>
-                            <li>Sistem akan langsung menampilkan informasi: Nama Aset, NUP, Lokasi, dan Kondisi Terakhir tanpa perlu mencari manual.</li>
-                        </ol>
+                        <div class="accordion" id="guideManagement">
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepPSP">
+                                    <h6 class="mb-0">A. Penetapan Status (PSP)</h6>
+                                </div>
+                                <div id="stepPSP" class="collapse show" data-parent="#guideManagement">
+                                    <div class="card-body">
+                                        <p>Setiap aset wajib memiliki status penggunaan yang sah.</p>
+                                        <ol>
+                                            <li>Menu: <strong>PENGELOLAAN ASET TETAP > Penetapan Status (PSP)</strong>.</li>
+                                            <li>Pilih aset yang belum berstatus PSP.</li>
+                                            <li>Input nomor SK PSP dan tanggal penetapannya.</li>
+                                            <li>Unggah dokumen SK dalam format PDF sebagai arsip digital.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepDist">
+                                    <h6 class="mb-0">B. Distribusi & Pemegang Aset (BAST)</h6>
+                                </div>
+                                <div id="stepDist" class="collapse" data-parent="#guideManagement">
+                                    <div class="card-body">
+                                        <p>Mencatat perpindahan tangan atau penanggung jawab aset.</p>
+                                        <ol>
+                                            <li>Gunakan menu <strong>Distribusi Aset</strong> untuk memindahkan aset antar ruangan/unit.</li>
+                                            <li>Gunakan <strong>Pemegang Aset (BAST)</strong> untuk mencatat personil yang memegang aset perorangan (seperti Laptop/HP).</li>
+                                            <li>Cetak Berita Acara Serah Terima (BAST) langsung dari sistem sebagai bukti fisik.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaintenance">
+                                    <h6 class="mb-0">C. Maintenance & Evaluasi</h6>
+                                </div>
+                                <div id="stepMaintenance" class="collapse" data-parent="#guideManagement">
+                                    <div class="card-body">
+                                        <p>Menjaga kondisi aset tetap prima.</p>
+                                        <ul>
+                                            <li><strong>Maintenance Aset:</strong> Catat setiap kali ada perbaikan (servis AC, ganti oli mobil, dll) beserta biayanya.</li>
+                                            <li><strong>Evaluasi Berkala:</strong> Lakukan pengecekan kondisi fisik setiap 6 bulan sekali untuk memastikan data sistem sesuai dengan fakta lapangan.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- RKBMN -->
+            <!-- 7. Perencanaan (RKBMN) -->
             <div class="tab-pane fade" id="rkbmn">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">5. Perencanaan (RKBMN)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">7. Perencanaan (RKBMN)</h3>
                     </div>
                     <div class="card-body">
                         <p>Modul RKBMN digunakan untuk merencanakan kebutuhan aset di masa mendatang secara sistematis.</p>
                         
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/rkbmn_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="RKBMN UI">
-                            <p class="small text-muted mt-2">Gambar 5.1: Dashboard Perencanaan (RKBMN)</p>
+                            <p class="small text-muted mt-2">Gambar 7.1: Dashboard Perencanaan (RKBMN)</p>
                         </div>
 
                         <div class="accordion" id="guideRKBMN">
@@ -277,30 +322,41 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepAction">
-                                    <h6 class="mb-0">3. Usulan Pemanfaatan & Penghapusan</h6>
-                                </div>
-                                <div id="stepAction" class="collapse" data-parent="#guideRKBMN">
-                                    <div class="card-body">
-                                        <p>Gunakan modul ini untuk merencanakan aset yang akan disewakan (Pemanfaatan) atau aset yang sudah rusak total dan ingin dikeluarkan dari daftar (Penghapusan).</p>
-                                        <ul>
-                                            <li><strong>Pemanfaatan:</strong> Memaksimalkan potensi aset untuk PNBP.</li>
-                                            <li><strong>Penghapusan:</strong> Membersihkan daftar aset dari barang yang sudah tidak memiliki nilai ekonomis/fisik.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 8. Update Sistem -->
+            <!-- 8. Penggunaan QR Code -->
+            <div class="tab-pane fade" id="qr-code">
+                <div class="card border-0">
+                    <div class="card-header bg-white text-dark">
+                        <h3 class="card-title font-weight-bold text-primary">8. Penggunaan QR Code</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
+
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
+                            <p class="small text-muted mt-2">Gambar 8.1: Proses Pemindaian QR Code Aset</p>
+                        </div>
+
+                        <h6><strong>Langkah Audit Lapangan:</strong></h6>
+                        <ol>
+                            <li>Buka menu <strong>Scan QR / Cek Aset</strong> di HP atau Laptop.</li>
+                            <li>Izinkan akses kamera.</li>
+                            <li>Arahkan kamera ke label aset.</li>
+                            <li>Sistem akan langsung menampilkan informasi: Nama Aset, NUP, Lokasi, dan Kondisi Terakhir tanpa perlu mencari manual.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Update Sistem -->
             <div class="tab-pane fade" id="update">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">8. Pembaruan Sistem (System Update)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">9. Pembaruan Sistem (System Update)</h3>
                     </div>
                     <div class="card-body">
                         <p>Menjaga aplikasi tetap mutakhir dengan satu klik.</p>
