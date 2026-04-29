@@ -54,13 +54,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#insurance" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-file-invoice-dollar mr-2"></i> 9. Asuransi BMN
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#sbsk" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-chart-line mr-2"></i> 10. Evaluasi Kinerja (SBSK)
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#qr-code" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-qrcode mr-2"></i> 9. Penggunaan QR Code
+                            <i class="fas fa-qrcode mr-2"></i> 11. Penggunaan QR Code
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#update" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-sync-alt mr-2"></i> 10. Pembaruan Sistem
+                            <i class="fas fa-sync-alt mr-2"></i> 12. Pembaruan Sistem
                         </a>
                     </li>
                 </ul>
@@ -341,18 +351,71 @@
                 </div>
             </div>
 
-            <!-- 9. QR Code -->
+            <!-- 9. Asuransi BMN -->
+            <div class="tab-pane fade" id="insurance">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">9. Asuransi BMN</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="small text-muted">Melindungi aset negara dari risiko bencana, kebakaran, dan kerusakan lainnya.</p>
+                        
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/insurance.png') }}" class="img-fluid rounded shadow-sm border" alt="Insurance UI">
+                            <p class="small text-muted mt-2">Gambar 9.1: Dashboard Pengelolaan Asuransi Aset</p>
+                        </div>
+
+                        <h6><strong>Langkah Input Polis:</strong></h6>
+                        <ol class="small">
+                            <li>Buka menu <strong>Asuransi BMN</strong>.</li>
+                            <li>Klik <strong>"Tambah Polis"</strong>.</li>
+                            <li>Masukkan <strong>Nomor Polis</strong>, <strong>Nama Perusahaan Asuransi</strong>, dan <strong>Nilai Pertanggungan</strong>.</li>
+                            <li><strong>Pilih Aset:</strong> Klik tombol "Pilih Daftar Aset" untuk mencentang barang/gedung mana saja yang masuk dalam polis ini.</li>
+                            <li>Input <strong>Masa Berlaku</strong> (Tanggal Mulai & Selesai). Sistem akan memberi peringatan jika polis hampir habis.</li>
+                            <li>Klik Simpan.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 10. Evaluasi Kinerja (SBSK) -->
+            <div class="tab-pane fade" id="sbsk">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">10. Evaluasi Kinerja (SBSK)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="small text-muted">SBSK (Standar Barang Standar Kebutuhan) digunakan untuk mengukur efisiensi penggunaan aset gedung/bangunan.</p>
+                        
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('img/guide/sbsk.png') }}" class="img-fluid rounded shadow-sm border" alt="SBSK UI">
+                            <p class="small text-muted mt-2">Gambar 10.1: Grafik Analisis Efisiensi Aset (SBSK)</p>
+                        </div>
+
+                        <h6><strong>Cara Melakukan Evaluasi:</strong></h6>
+                        <ol class="small">
+                            <li>Buka menu <strong>Evaluasi Kinerja (SBSK)</strong>.</li>
+                            <li>Pilih Aset Gedung yang ingin dievaluasi.</li>
+                            <li>Klik <strong>"Proses SBSK"</strong>.</li>
+                            <li>Input <strong>Jumlah Pegawai</strong> yang menempati gedung tersebut dan <strong>Luas Eksisting</strong>.</li>
+                            <li>Sistem akan otomatis menghitung apakah gedung tersebut <strong>"Optimal"</strong>, <strong>"Berlebih (Over)"</strong>, atau <strong>"Kurang"</strong> berdasarkan standar luas per pegawai.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 11. Penggunaan QR Code -->
             <div class="tab-pane fade" id="qr-code">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">9. Penggunaan QR Code</h3>
+                        <h3 class="card-title font-weight-bold text-primary">11. Penggunaan QR Code</h3>
                     </div>
                     <div class="card-body">
                         <p>Memudahkan audit lapangan hanya dengan smartphone.</p>
 
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
-                            <p class="small text-muted mt-2">Gambar 9.1: Proses Pemindaian QR Code Aset</p>
+                            <p class="small text-muted mt-2">Gambar 11.1: Proses Pemindaian QR Code Aset</p>
                         </div>
 
                         <h6><strong>Langkah Audit Cepat:</strong></h6>
@@ -366,11 +429,11 @@
                 </div>
             </div>
 
-            <!-- 10. Update Sistem -->
+            <!-- 12. Update Sistem -->
             <div class="tab-pane fade" id="update">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">10. Pembaruan Sistem (System Update)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">12. Pembaruan Sistem (System Update)</h3>
                     </div>
                     <div class="card-body">
                         <p>Menjamin sistem Anda selalu memiliki fitur terbaru dan keamanan yang ditingkatkan.</p>
