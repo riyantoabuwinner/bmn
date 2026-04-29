@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
-use App\Imports\AssetsImport;
+use App\Imports\AssetImport;
 use App\Exports\AssetsExport;
 
 class AssetController extends Controller
@@ -40,7 +40,7 @@ class AssetController extends Controller
 
         session(['asset_import_task_id' => $task->id]);
 
-        Excel::queueImport(new \App\Imports\AssetImport($task->id), $path);
+        Excel::queueImport(new AssetImport($task->id), $path);
 
         ActivityLog::create([
             'user_id' => auth()->id(),

@@ -527,6 +527,12 @@ return [
             'icon' => 'fas fa-fw fa-user',
         ],
         [
+            'text' => 'Update Sistem',
+            'route' => 'system.update.index',
+            'icon' => 'fas fa-fw fa-sync-alt',
+            'role' => ['superadmin'],
+        ],
+        [
             'text' => 'Log Aktivitas',
             'url' => 'logs',
             'icon' => 'fas fa-fw fa-history',

@@ -13,6 +13,7 @@ use App\Http\Controllers\AssetOpnameController;
 use App\Http\Controllers\AssetDeletionController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SystemUpdateController;
 use App\Http\Controllers\AssetPspController;
 use App\Http\Controllers\AssetUtilizationController;
 use App\Http\Controllers\AssetTransferController;
@@ -159,6 +160,11 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureUserIsApproved
 
     // Routes for admin/operator - logs
     Route::middleware('role:superadmin|admin|admin_rektorat|operator_fakultas')->group(function () {
+        // System Update
+        Route::get('system/update', [SystemUpdateController::class, 'index'])->name('system.update.index');
+        Route::post('system/update/check', [SystemUpdateController::class, 'check'])->name('system.update.check');
+        Route::post('system/update/apply', [SystemUpdateController::class, 'apply'])->name('system.update.apply');
+
         // Activity Logs
         Route::get('logs', [ActivityLogController::class , 'index'])->name('logs.index');
 
