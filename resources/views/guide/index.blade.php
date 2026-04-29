@@ -49,13 +49,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="#wasdal" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-shield-alt mr-2"></i> 8. Pengawasan (WASDAL)
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="#qr-code" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-qrcode mr-2"></i> 8. Penggunaan QR Code
+                            <i class="fas fa-qrcode mr-2"></i> 9. Penggunaan QR Code
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#update" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-sync-alt mr-2"></i> 9. Pembaruan Sistem
+                            <i class="fas fa-sync-alt mr-2"></i> 10. Pembaruan Sistem
                         </a>
                     </li>
                 </ul>
@@ -192,17 +197,41 @@
                         <h3 class="card-title font-weight-bold text-primary">5. Aset Lancar (Persediaan)</h3>
                     </div>
                     <div class="card-body">
-                        <p>Mengelola stok barang habis pakai seperti alat tulis, bahan pembersih, dll.</p>
+                        <p class="small text-muted">Digunakan untuk mengelola stok barang habis pakai (ATK, Cairan Pembersih, dll).</p>
                         
-                        <h6><strong>Siklus Stok:</strong></h6>
-                        <div class="row">
-                            <div class="col-md-6 border-right">
-                                <h6 class="font-weight-bold text-success">Barang Masuk</h6>
-                                <p class="small">Lakukan input di menu <strong>Transaksi Persediaan</strong> dengan tipe <strong>"Masuk"</strong>. Stok di gudang akan bertambah otomatis.</p>
+                        <div class="accordion" id="guideAsetLancar">
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockIn">
+                                    <h6 class="mb-0">A. Mencatat Barang Masuk (Pengadaan)</h6>
+                                </div>
+                                <div id="stepStockIn" class="collapse show" data-parent="#guideAsetLancar">
+                                    <div class="card-body">
+                                        <ol class="small">
+                                            <li>Buka menu <strong>PENGELOLAAN ASET LANCAR > Transaksi Persediaan</strong>.</li>
+                                            <li>Klik tombol hijau <strong>"Tambah Transaksi"</strong>.</li>
+                                            <li>Pilih Jenis Transaksi: <span class="badge badge-success">Masuk</span>.</li>
+                                            <li>Pilih <strong>Nama Barang</strong> dari dropdown. Jika barang belum ada, daftarkan dulu di Master Data.</li>
+                                            <li>Masukkan <strong>Jumlah (Quantity)</strong> dan <strong>Harga Satuan</strong>.</li>
+                                            <li>Klik <strong>"Simpan Transaksi"</strong>. Stok di tabel utama akan bertambah otomatis.</li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <h6 class="font-weight-bold text-danger">Barang Keluar</h6>
-                                <p class="small">Pilih tipe <strong>"Keluar"</strong> saat ada permintaan pemakaian barang. Stok akan berkurang dan tercatat siapa penggunanya.</p>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockOut">
+                                    <h6 class="mb-0">B. Mencatat Barang Keluar (Pemakaian)</h6>
+                                </div>
+                                <div id="stepStockOut" class="collapse" data-parent="#guideAsetLancar">
+                                    <div class="card-body">
+                                        <ol class="small">
+                                            <li>Sama seperti langkah sebelumnya, pilih tombol <strong>"Tambah Transaksi"</strong>.</li>
+                                            <li>Pilih Jenis Transaksi: <span class="badge badge-danger">Keluar</span>.</li>
+                                            <li>Pilih barang yang diambil. Pastikan jumlahnya tidak melebihi stok yang ada.</li>
+                                            <li>Masukkan <strong>Nama Penerima</strong> atau Unit Kerja pemakai.</li>
+                                            <li>Klik <strong>Simpan</strong>. Stok akan berkurang seketika.</li>
+                                        </ol>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -384,18 +413,64 @@
                 </div>
             </div>
 
-            <!-- 8. Penggunaan QR Code -->
+            <!-- 8. Pengawasan (WASDAL) -->
+            <div class="tab-pane fade" id="wasdal">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">8. Pengawasan (WASDAL)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p class="small text-muted">Memastikan penggunaan aset efisien dan sesuai dengan regulasi.</p>
+                        
+                        <div class="accordion" id="guideWasdal">
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepReportWasdal">
+                                    <h6 class="mb-0">A. Pelaporan Wasdal</h6>
+                                </div>
+                                <div id="stepReportWasdal" class="collapse show" data-parent="#guideWasdal">
+                                    <div class="card-body">
+                                        <ol class="small">
+                                            <li>Menu: <strong>PENGAWASAN (WASDAL) > Pelaporan Wasdal</strong>.</li>
+                                            <li>Klik <strong>"Buat Laporan Baru"</strong>.</li>
+                                            <li>Pilih periode pelaporan (Semester/Tahunan).</li>
+                                            <li>Sistem akan menarik data PSP dan penggunaan aset secara otomatis.</li>
+                                            <li>Klik <strong>"Generate Laporan"</strong> dan unduh hasilnya untuk dikirim ke pengelola barang pusat.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMonitoring">
+                                    <h6 class="mb-0">B. Monitoring & Aset Idle</h6>
+                                </div>
+                                <div id="stepMonitoring" class="collapse" data-parent="#guideWasdal">
+                                    <div class="card-body">
+                                        <p class="small">Aset <strong>Idle</strong> adalah barang yang tersedia namun tidak digunakan oleh unit kerja.</p>
+                                        <ol class="small">
+                                            <li>Buka menu <strong>Monitoring & Idle</strong>.</li>
+                                            <li>Sistem menampilkan daftar barang dengan status <strong>"Tersedia"</strong> namun tidak ada riwayat distribusi/peminjaman dalam 6 bulan terakhir.</li>
+                                            <li>Anda dapat mengusulkan aset ini untuk dipindahtangankan ke unit lain yang lebih membutuhkan.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9. Penggunaan QR Code -->
             <div class="tab-pane fade" id="qr-code">
                 <div class="card border-0">
                     <div class="card-header bg-white text-dark">
-                        <h3 class="card-title font-weight-bold text-primary">8. Penggunaan QR Code</h3>
+                        <h3 class="card-title font-weight-bold text-primary">9. Penggunaan QR Code</h3>
                     </div>
                     <div class="card-body">
                         <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
 
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
-                            <p class="small text-muted mt-2">Gambar 8.1: Proses Pemindaian QR Code Aset</p>
+                            <p class="small text-muted mt-2">Gambar 9.1: Proses Pemindaian QR Code Aset</p>
                         </div>
 
                         <h6><strong>Langkah Audit Lapangan:</strong></h6>
@@ -409,11 +484,11 @@
                 </div>
             </div>
 
-            <!-- 9. Update Sistem -->
+            <!-- 10. Update Sistem -->
             <div class="tab-pane fade" id="update">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">9. Pembaruan Sistem (System Update)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">10. Pembaruan Sistem (System Update)</h3>
                     </div>
                     <div class="card-body">
                         <p>Menjaga aplikasi tetap mutakhir dengan satu klik.</p>
