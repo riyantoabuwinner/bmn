@@ -32,5 +32,7 @@
                 {{ $slot }}
             </main>
         </div>
+
+        <x-accessibility-widget />
     </body>
 </html>

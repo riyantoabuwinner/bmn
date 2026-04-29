@@ -26,5 +26,7 @@
                 {{ $slot }}
             </div>
         </div>
+
+        <x-accessibility-widget />
     </body>
 </html>

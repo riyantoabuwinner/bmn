@@ -14,7 +14,7 @@ return [
      |
      */
 
-    'title' => 'BMN System',
+    'title' => 'BMN Core',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -63,7 +63,7 @@ return [
      |
      */
 
-    'logo' => '<b>BMN</b> System',
+    'logo' => '<span class="notranslate" translate="no"><b><span class="bmn-fixed"></span></b> <span class="core-fixed" style="color: #dc2626 !important; font-style: italic !important;"></span></span>',
     'logo_img' => 'img/logo_uinssc.png',
     'logo_img_class' => 'brand-image elevation-3',
     'logo_img_xl' => false,
@@ -306,11 +306,11 @@ return [
             'topnav_right' => true,
         ],
         [
-            'type' => 'fullscreen-widget',
+            'type' => 'darkmode-widget',
             'topnav_right' => true,
         ],
         [
-            'type' => 'darkmode-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 

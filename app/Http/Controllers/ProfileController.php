@@ -71,4 +71,19 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    /**
+     * Update the user's accessibility settings.
+     */
+    public function updateAccessibility(Request $request)
+    {
+        $request->validate([
+            'settings' => 'required|array',
+        ]);
+
+        $request->user()->update([
+            'accessibility_settings' => $request->settings,
+        ]);
+
+        return response()->json(['message' => 'Accessibility settings updated successfully']);
+    }
 }

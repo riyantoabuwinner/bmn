@@ -49,6 +49,7 @@ class User extends Authenticatable
         'approval_status',
         'avatar',
         'signature',
+        'accessibility_settings',
     ];
 
     public function roleRequests()
@@ -104,6 +105,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'accessibility_settings' => 'array',
         ];
     }
 }

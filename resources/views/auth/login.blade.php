@@ -233,11 +233,12 @@
         <div class="login-form-side">
             <div class="login-form-wrapper">
                 <div class="login-header text-center">
-                    <div style="margin-bottom: 10px; display: inline-block; background: #fff; padding: 10px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-                        <img src="{{ asset('img/logo_uinssc.png') }}" alt="Logo" style="height: 45px; width: auto;">
+                    <div style="margin-bottom: 20px; display: inline-block; background: #fff; padding: 12px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+                        <img src="{{ asset('img/logo_uinssc.png') }}" alt="Logo" style="height: 55px; width: auto;">
                     </div>
-                    <h2>Selamat Datang</h2>
-                    <p>Silahkan masukkan kredensial akun Anda untuk mengakses sistem BMN.</p>
+                    <h2 class="notranslate" translate="no" style="font-weight: 800; letter-spacing: -1px; font-size: 32px; color: #1e1b4b;"><span class="bmn-fixed"></span> <span class="core-fixed" style="color: #dc2626 !important; font-style: italic !important;"></span></h2>
+                    <p class="notranslate" translate="no" style="color: #6366f1; font-weight: 500; font-size: 13px; margin-bottom: 5px;">Centralized Organization of Resource Ecosystem for <span class="bmn-fixed"></span></p>
+                    <p class="notranslate" translate="no" style="color: #94a3b8; font-size: 12px; margin-bottom: 30px;">UIN <span class="siber-fixed"></span> Syekh Nurjati Cirebon</p>
                 </div>
 
             @if (session('status'))
@@ -305,8 +306,13 @@
                     Masuk Sekarang
                 </button>
                 
+                <style>
+                    .bmn-fixed::after { content: "BMN"; }
+                    .siber-fixed::after { content: "Siber"; }
+                    .core-fixed::after { content: "Core!"; color: #dc2626 !important; font-style: italic !important; }
+                </style>
                 <p class="text-center mt-4 text-muted" style="font-size: 13px;">
-                    &copy; 2026 PUSTIKOM UIN Siber Syekh Nurjati Cirebon. All rights reserved.
+                    &copy; 2026 PUSTIKOM <span class="notranslate" translate="no">UIN Syekh Nurjati Cirebon</span>. All Rights Reserved.
                 </p>
             </form>
             </div>
@@ -337,9 +343,12 @@
                     </div>
                 </div>
                      
-                <h1 class="hero-title">Manajemen Pengelolaan Aset</h1>
-                <p class="hero-subtitle">
-                    Sistem informasi terintegrasi untuk pencatatan, pelacakan, dan pelaporan Barang Milik Negara secara efisien dan akurat.
+                <h1 class="hero-title notranslate" translate="no" style="font-size: 52px;"><span class="bmn-fixed"></span> <span class="core-fixed" style="color: #dc2626 !important; font-style: italic !important;"></span></h1>
+                <p class="hero-subtitle notranslate" translate="no" style="font-weight: 600; font-size: 20px; margin-bottom: 10px;">
+                    Centralized Organization of Resource Ecosystem for <span class="bmn-fixed"></span>
+                </p>
+                <p class="notranslate" translate="no" style="font-size: 16px; opacity: 0.8; letter-spacing: 1px;">
+                    UIN <span class="siber-fixed"></span> Syekh Nurjati Cirebon
                 </p>
             </div>
         </div>

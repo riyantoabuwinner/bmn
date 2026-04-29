@@ -191,6 +191,7 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureUserIsApproved
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [App\Http\Controllers\ProfileController::class , 'edit'])->name('profile.edit');
     Route::patch('/profile', [App\Http\Controllers\ProfileController::class , 'update'])->name('profile.update');
+    Route::post('/profile/accessibility', [App\Http\Controllers\ProfileController::class , 'updateAccessibility'])->name('profile.accessibility');
     Route::delete('/profile', [App\Http\Controllers\ProfileController::class , 'destroy'])->name('profile.destroy');
 });
 

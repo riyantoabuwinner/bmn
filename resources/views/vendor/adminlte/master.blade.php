@@ -73,6 +73,10 @@
     {{-- Custom Stylesheets (post AdminLTE) --}}
     @yield('adminlte_css')
 
+    {{-- Accessibility & App Assets --}}
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+
     {{-- Favicon --}}
     @if(config('adminlte.use_ico_only'))
         <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
@@ -138,6 +142,8 @@
 
     {{-- Custom Scripts --}}
     @yield('adminlte_js')
+
+    <x-accessibility-widget />
 
 </body>
 
