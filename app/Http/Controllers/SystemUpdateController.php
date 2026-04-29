@@ -18,8 +18,15 @@ class SystemUpdateController extends Controller
 
     public function check(Request $request)
     {
-        // Git Fetch to update remote info
-        exec('git fetch origin main 2>&1', $output, $returnCode);
+        // Set environment variable to prevent git from prompting for input
+        putenv('GIT_TERMINAL_PROMPT=0');
+        
+        // Git Fetch with a 10 second timeout
+        $process = \Illuminate\Support\Facades\Process::timeout(10)->run('git fetch origin main');
+        
+        if ($process->failed()) {
+            \Log::error("Git Fetch Failed: " . $process->errorOutput());
+        }
         
         $status = $this->getGitStatus();
         $logs = $this->getGitLogs();
@@ -30,16 +37,18 @@ class SystemUpdateController extends Controller
             'status' => $status,
             'logs' => $logs,
             'has_migrations' => $hasMigrations,
-            'output' => implode("\n", $output)
+            'output' => $process->output() ?: $process->errorOutput()
         ]);
     }
 
     public function apply(Request $request)
     {
-        // Perform Git Pull
-        exec('git pull origin main 2>&1', $output, $returnCode);
+        putenv('GIT_TERMINAL_PROMPT=0');
         
-        $success = ($returnCode === 0);
+        // Perform Git Pull with 30s timeout
+        $process = \Illuminate\Support\Facades\Process::timeout(30)->run('git pull origin main');
+        
+        $success = $process->successful();
         
         // Post-update: Clear cache
         if ($success) {
@@ -50,8 +59,8 @@ class SystemUpdateController extends Controller
 
         return response()->json([
             'success' => $success,
-            'output' => implode("\n", $output),
-            'message' => $success ? 'Sistem berhasil diperbarui.' : 'Gagal memperbarui sistem.'
+            'output' => $process->output() ?: $process->errorOutput(),
+            'message' => $success ? 'Sistem berhasil diperbarui.' : 'Gagal memperbarui sistem. Cek output untuk detailnya.'
         ]);
     }
 
