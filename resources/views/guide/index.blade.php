@@ -8,43 +8,44 @@
 
 @section('content')
 <div class="row">
+    <!-- Sidebar Navigasi -->
     <div class="col-md-3">
-        <div class="card card-primary card-outline shadow-sm">
+        <div class="card card-primary card-outline shadow-sm sticky-top" style="top: 20px;">
             <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column guide-nav">
                     <li class="nav-item">
                         <a href="#intro" class="nav-link active" data-toggle="pill">
-                            <i class="fas fa-info-circle mr-2"></i> Pendahuluan
+                            <i class="fas fa-info-circle mr-2"></i> 1. Memulai & Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#master-data" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-database mr-2"></i> 2. Pengaturan Master Data
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#asset-tetap" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-box mr-2"></i> Manajemen Aset Tetap
+                            <i class="fas fa-box mr-2"></i> 3. Manajemen Aset Tetap
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#import-detail" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-file-import mr-2"></i> 4. Panduan Import Massal
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#asset-lancar" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-boxes mr-2"></i> Aset Lancar (Persediaan)
+                            <i class="fas fa-boxes mr-2"></i> 5. Aset Lancar (Persediaan)
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#transaksi" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-exchange-alt mr-2"></i> Transaksi & Pengelolaan
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#rkbmn" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-calendar-check mr-2"></i> Perencanaan (RKBMN)
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#wasdal" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-shield-alt mr-2"></i> Pengawasan (Wasdal)
+                        <a href="#qr-code" class="nav-link" data-toggle="pill">
+                            <i class="fas fa-qrcode mr-2"></i> 6. Penggunaan QR Code
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="#update" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-sync-alt mr-2"></i> Pembaruan Sistem
+                            <i class="fas fa-sync-alt mr-2"></i> 7. Pembaruan Sistem
                         </a>
                     </li>
                 </ul>
@@ -52,215 +53,198 @@
         </div>
     </div>
 
+    <!-- Konten Panduan -->
     <div class="col-md-9">
         <div class="tab-content shadow-sm">
-            <!-- Pendahuluan -->
+            
+            <!-- 1. Memulai & Dashboard -->
             <div class="tab-pane fade show active" id="intro">
                 <div class="card border-0">
-                    <div class="card-header bg-white border-bottom-0">
-                        <h3 class="card-title font-weight-bold text-primary">Selamat Datang di BMN System</h3>
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">1. Memulai & Dashboard</h3>
                     </div>
-                    <div class="card-body pt-0">
-                        <p class="text-muted">Sistem Informasi Barang Milik Negara (BMN) ini dirancang untuk memudahkan pengelolaan siklus hidup aset negara secara transparan dan akuntabel.</p>
-                        <hr>
-                        <h5><i class="fas fa-star text-warning mr-2"></i> Fitur Utama</h5>
-                        <ul class="list-unstyled ml-4">
-                            <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> <strong>Bulk Import:</strong> Unggah ratusan ribu data aset sekaligus menggunakan Excel/CSV.</li>
-                            <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> <strong>QR Code:</strong> Cek detail aset secara cepat melalui pemindaian kode QR.</li>
-                            <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> <strong>Siklus Lengkap:</strong> Dari usulan pengadaan hingga penghapusan.</li>
-                            <li class="mb-2"><i class="fas fa-check text-success mr-2"></i> <strong>Keamanan Git:</strong> Pembaruan sistem aman dan terverifikasi via GitHub.</li>
+                    <div class="card-body">
+                        <p>Selamat datang di sistem manajemen BMN. Setelah Anda login, Anda akan disuguhkan halaman Dashboard yang memberikan ringkasan kondisi aset secara real-time.</p>
+                        
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('artifacts/bmn_real_app_mockup_1777442161051.png') }}" class="img-fluid rounded shadow-sm border" alt="Dashboard View">
+                            <p class="small text-muted mt-2">Gambar 1.1: Tampilan Dashboard Utama</p>
+                        </div>
+
+                        <h6><strong>Langkah Memahami Dashboard:</strong></h6>
+                        <ol>
+                            <li><strong>Widget Statistik:</strong> Di bagian atas, Anda dapat melihat total Aset Tetap, Aset Lancar, dan total nilai perolehan.</li>
+                            <li><strong>Grafik Kondisi:</strong> Lingkaran grafik menunjukkan perbandingan aset dalam kondisi Baik, Rusak Ringan, dan Rusak Berat.</li>
+                            <li><strong>Aktivitas Terbaru:</strong> Di bagian kanan, terdapat log aktivitas siapa saja yang melakukan perubahan data terakhir.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Master Data -->
+            <div class="tab-pane fade" id="master-data">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">2. Pengaturan Master Data</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Sebelum menginput aset, Anda harus memastikan data master sudah terisi dengan benar.</p>
+                        
+                        <div class="alert alert-warning py-2 mb-4">
+                            <small><i class="fas fa-exclamation-triangle mr-1"></i> Penting: Master Data adalah fondasi sistem. Kesalahan input di sini akan mempengaruhi laporan akhir.</small>
+                        </div>
+
+                        <h6><strong>Langkah-Langkah:</strong></h6>
+                        <ul>
+                            <li class="mb-3">
+                                <strong>Satuan Kerja (Units):</strong>
+                                <p class="small text-muted">Menu: <code>Master Data > Satuan Kerja</code>. Tambahkan unit kerja (Fakultas/Biro/Lembaga) yang ada di instansi Anda.</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Kategori Aset:</strong>
+                                <p class="small text-muted">Menu: <code>Master Data > Jenis Aset Tetap</code>. Pastikan kategori sesuai dengan standar SIMAN/Sakti (Tanah, Peralatan, Gedung, dll).</p>
+                            </li>
+                            <li class="mb-3">
+                                <strong>Lokasi Ruang:</strong>
+                                <p class="small text-muted">Menu: <code>Master Data > Lokasi Ruang</code>. Daftarkan nama ruangan (Gedung A Lantai 1, Lab Komputer, dll).</p>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <!-- Manajemen Aset Tetap -->
+            <!-- 3. Manajemen Aset Tetap -->
             <div class="tab-pane fade" id="asset-tetap">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold">Manajemen Aset Tetap</h3>
+                        <h3 class="card-title font-weight-bold text-primary">3. Manajemen Aset Tetap</h3>
                     </div>
                     <div class="card-body">
-                        <div class="accordion" id="guideAsetTetap">
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepImport">
-                                    <h6 class="mb-0">1. Cara Import Aset Skala Besar</h6>
-                                </div>
-                                <div id="stepImport" class="collapse show" data-parent="#guideAsetTetap">
-                                    <div class="card-body">
-                                        <ol>
-                                            <li>Masuk ke menu <strong>Inventarisasi > Aset Tetap</strong>.</li>
-                                            <li>Klik tombol <strong>"Import Excel/CSV"</strong>.</li>
-                                            <li>Pilih tab <strong>"Download Template"</strong> jika Anda belum memiliki format yang sesuai.</li>
-                                            <li>Siapkan data Anda. Untuk data > 100.000 baris, <strong>sangat disarankan menggunakan format CSV</strong>.</li>
-                                            <li>Unggah file Anda dan perhatikan <strong>Progress Bar</strong>. Jangan menutup halaman hingga proses selesai 100%.</li>
-                                        </ol>
-                                        <div class="alert alert-info py-2">
-                                            <small><i class="fas fa-lightbulb mr-1"></i> Tips: Jika progress bar macet, klik tombol "Reset Tampilan Import" (Merah) dan coba lagi.</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepManual">
-                                    <h6 class="mb-0">2. Menambah Aset Secara Manual</h6>
-                                </div>
-                                <div id="stepManual" class="collapse" data-parent="#guideAsetTetap">
-                                    <div class="card-body">
-                                        <ol>
-                                            <li>Klik tombol <strong>"Tambah Aset"</strong> di halaman daftar aset.</li>
-                                            <li>Isi data wajib: Kode Satker, Nama Barang, Kode Barang, dan NUP.</li>
-                                            <li>Unggah foto aset jika tersedia untuk memudahkan identifikasi fisik.</li>
-                                            <li>Klik simpan. QR Code akan otomatis dibuat oleh sistem.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
+                        <p>Modul ini adalah jantung dari aplikasi untuk mencatat semua Barang Milik Negara.</p>
+                        
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('artifacts/bmn_app_header_1777442019144.png') }}" class="img-fluid rounded shadow-sm border" alt="Asset Header">
+                            <p class="small text-muted mt-2">Gambar 3.1: Menu Akses Aset Tetap</p>
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Aset Lancar -->
-            <div class="tab-pane fade" id="asset-lancar">
-                <div class="card border-0">
-                    <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold">Manajemen Aset Lancar (Persediaan)</h3>
-                    </div>
-                    <div class="card-body">
-                        <p>Modul ini digunakan untuk barang habis pakai atau persediaan.</p>
-                        <div class="accordion" id="guideAsetLancar">
-                            <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStock">
-                                    <h6 class="mb-0">1. Mencatat Transaksi Masuk/Keluar</h6>
-                                </div>
-                                <div id="stepStock" class="collapse show" data-parent="#guideAsetLancar">
-                                    <div class="card-body">
-                                        <ol>
-                                            <li>Menu <strong>Pengelolaan Aset Lancar > Transaksi Persediaan</strong>.</li>
-                                            <li>Klik <strong>"Tambah Transaksi"</strong>.</li>
-                                            <li>Pilih jenis transaksi: <strong>Masuk</strong> (untuk pengadaan/hibah) atau <strong>Keluar</strong> (untuk pemakaian).</li>
-                                            <li>Pilih barang dan masukkan jumlahnya.</li>
-                                            <li>Klik Simpan. Stok barang di tabel utama akan otomatis terupdate.</li>
-                                        </ol>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Transaksi -->
-            <div class="tab-pane fade" id="transaksi">
-                <div class="card border-0">
-                    <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold">Transaksi & Pengelolaan Aset</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="p-3 border rounded">
-                                    <h6><i class="fas fa-truck text-primary mr-2"></i> Distribusi Aset</h6>
-                                    <p class="small text-muted mb-0">Langkah mencatat penyerahan aset dari gudang ke unit kerja atau ruangan tertentu.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="p-3 border rounded">
-                                    <h6><i class="fas fa-hand-holding text-success mr-2"></i> Peminjaman Aset</h6>
-                                    <p class="small text-muted mb-0">Prosedur pinjam pakai aset antar unit dengan batas waktu tertentu.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="p-3 border rounded">
-                                    <h6><i class="fas fa-wrench text-danger mr-2"></i> Maintenance</h6>
-                                    <p class="small text-muted mb-0">Pencatatan biaya dan riwayat perbaikan fisik aset agar kondisi tetap prima.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="p-3 border rounded">
-                                    <h6><i class="fas fa-file-contract text-info mr-2"></i> PSP (Penetapan Status)</h6>
-                                    <p class="small text-muted mb-0">Legalitas penggunaan aset di bawah naungan instansi yang berwenang.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RKBMN -->
-            <div class="tab-pane fade" id="rkbmn">
-                <div class="card border-0">
-                    <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-info">Perencanaan (RKBMN)</h3>
-                    </div>
-                    <div class="card-body">
-                        <h5>Alur Pengajuan Rencana:</h5>
-                        <div class="timeline timeline-inverse">
-                            <div class="time-label">
-                                <span class="bg-primary">Tahap 1</span>
-                            </div>
-                            <div>
-                                <i class="fas fa-edit bg-blue"></i>
-                                <div class="timeline-item shadow-none border">
-                                    <h3 class="timeline-header">Input Usulan</h3>
-                                    <div class="timeline-body">Admin Unit menginput daftar kebutuhan pengadaan atau pemeliharaan aset untuk tahun mendatang di menu RKBMN.</div>
-                                </div>
-                            </div>
-                            <div class="time-label">
-                                <span class="bg-warning">Tahap 2</span>
-                            </div>
-                            <div>
-                                <i class="fas fa-tasks bg-yellow"></i>
-                                <div class="timeline-item shadow-none border">
-                                    <h3 class="timeline-header">Verifikasi</h3>
-                                    <div class="timeline-body">Super Admin atau Pimpinan memeriksa kelayakan usulan berdasarkan data aset yang sudah ada (SBSK).</div>
-                                </div>
-                            </div>
-                            <div>
-                                <i class="far fa-clock bg-gray"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Wasdal -->
-            <div class="tab-pane fade" id="wasdal">
-                <div class="card border-0">
-                    <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold">Pengawasan & Pengendalian (Wasdal)</h3>
-                    </div>
-                    <div class="card-body text-center py-5">
-                        <i class="fas fa-shield-alt fa-3x text-info mb-3"></i>
-                        <h5>Monitoring Aset Idle & Terbengkalai</h5>
-                        <p class="text-muted mx-auto" style="max-width: 600px;">Gunakan menu Wasdal untuk mencatat aset yang tidak digunakan secara maksimal. Sistem akan memberikan alarm jika terdapat aset yang belum ditetapkan statusnya (PSP) lebih dari satu tahun.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Update Sistem -->
-            <div class="tab-pane fade" id="update">
-                <div class="card border-0">
-                    <div class="card-header bg-white text-dark">
-                        <h3 class="card-title font-weight-bold">Pembaruan Sistem (System Update)</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="p-3 border-left border-success border-4 bg-light mb-4">
-                            <strong><i class="fas fa-shield-alt text-success mr-2"></i> Keamanan Kode Utama</strong>
-                            <p class="mb-0 small">Fitur ini menjamin aplikasi Anda selalu sinkron dengan versi terbaru dari tim pengembang pusat tanpa merusak data yang ada.</p>
-                        </div>
-                        <h6>Langkah Update Aman:</h6>
+                        <h6><strong>Cara Menambah Aset Secara Manual:</strong></h6>
                         <ol>
-                            <li>Buka menu <strong>PENGATURAN > Update Sistem</strong>.</li>
-                            <li>Klik <strong>"Cek Pembaruan"</strong>.</li>
-                            <li>Tunggu 10 detik hingga sistem memverifikasi versi di GitHub.</li>
-                            <li>Jika muncul notifikasi update, baca <strong>Riwayat Perubahan</strong> untuk mengetahui fitur baru apa saja yang ditambahkan.</li>
-                            <li>Klik <strong>"Perbarui Sistem"</strong> untuk melakukan sinkronisasi.</li>
+                            <li>Buka menu <strong>Inventarisasi > Aset Tetap</strong>.</li>
+                            <li>Klik tombol biru <strong>"Tambah Aset"</strong> di pojok kanan atas.</li>
+                            <li>Isi form yang muncul:
+                                <ul>
+                                    <li><strong>Kode Barang:</strong> 10 digit kode akun barang.</li>
+                                    <li><strong>NUP:</strong> Nomor Urut Pendaftaran.</li>
+                                    <li><strong>Kondisi:</strong> Pilih status fisik saat ini.</li>
+                                </ul>
+                            </li>
+                            <li>Klik <strong>Simpan</strong>. Sistem akan otomatis membuat entri baru dan menghasilkan QR Code unik.</li>
                         </ol>
                     </div>
                 </div>
             </div>
+
+            <!-- 4. Panduan Import Massal -->
+            <div class="tab-pane fade" id="import-detail">
+                <div class="card border-0">
+                    <div class="card-header bg-white text-dark">
+                        <h3 class="card-title font-weight-bold text-primary">4. Panduan Import Massal (Skala Besar)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Fitur ini memungkinkan Anda memasukkan ribuan data dalam hitungan menit.</p>
+
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('artifacts/guide_asset_import_ui_1777457673044.png') }}" class="img-fluid rounded shadow-sm border" alt="Import UI">
+                            <p class="small text-muted mt-2">Gambar 4.1: Antarmuka Proses Import Data</p>
+                        </div>
+
+                        <h6><strong>Langkah Detail Import (> 100.000 data):</strong></h6>
+                        <ol>
+                            <li>Gunakan tombol <strong>"Import Excel/CSV"</strong>.</li>
+                            <li><strong>Penting:</strong> Untuk data sangat besar, gunakan format <strong>CSV</strong>.</li>
+                            <li>Klik <strong>"Choose File"</strong> dan pilih file Anda.</li>
+                            <li>Klik <strong>"Upload & Import"</strong>.</li>
+                            <li>Sistem akan masuk ke tahap <strong>"Counting"</strong> (menghitung data), lalu <strong>"Processing"</strong>.</li>
+                            <li>Perhatikan Progress Bar. Anda bisa memantau pertambahan baris data yang berhasil masuk secara real-time.</li>
+                        </ol>
+                        
+                        <div class="p-3 bg-light border-left border-info rounded">
+                            <small><strong>Note:</strong> Jika terjadi error "Gagal Menghubungi Server", kemungkinan file terlalu besar. Pecahlah file menjadi maksimal 50.000 baris per unggahan.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Aset Lancar -->
+            <div class="tab-pane fade" id="asset-lancar">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">5. Aset Lancar (Persediaan)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Mengelola stok barang habis pakai seperti alat tulis, bahan pembersih, dll.</p>
+                        
+                        <h6><strong>Siklus Stok:</strong></h6>
+                        <div class="row">
+                            <div class="col-md-6 border-right">
+                                <h6 class="font-weight-bold text-success">Barang Masuk</h6>
+                                <p class="small">Lakukan input di menu <strong>Transaksi Persediaan</strong> dengan tipe <strong>"Masuk"</strong>. Stok di gudang akan bertambah otomatis.</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="font-weight-bold text-danger">Barang Keluar</h6>
+                                <p class="small">Pilih tipe <strong>"Keluar"</strong> saat ada permintaan pemakaian barang. Stok akan berkurang dan tercatat siapa penggunanya.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. QR Code -->
+            <div class="tab-pane fade" id="qr-code">
+                <div class="card border-0">
+                    <div class="card-header bg-white text-dark">
+                        <h3 class="card-title font-weight-bold text-primary">6. Penggunaan QR Code</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
+
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('artifacts/guide_qr_scanner_ui_1777457700315.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
+                            <p class="small text-muted mt-2">Gambar 6.1: Proses Pemindaian QR Code Aset</p>
+                        </div>
+
+                        <h6><strong>Langkah Audit Lapangan:</strong></h6>
+                        <ol>
+                            <li>Buka menu <strong>Scan QR / Cek Aset</strong> di HP atau Laptop.</li>
+                            <li>Izinkan akses kamera.</li>
+                            <li>Arahkan kamera ke label aset.</li>
+                            <li>Sistem akan langsung menampilkan informasi: Nama Aset, NUP, Lokasi, dan Kondisi Terakhir tanpa perlu mencari manual.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Update Sistem -->
+            <div class="tab-pane fade" id="update">
+                <div class="card border-0">
+                    <div class="card-header bg-white">
+                        <h3 class="card-title font-weight-bold text-primary">7. Pembaruan Sistem (System Update)</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>Menjaga aplikasi tetap mutakhir dengan satu klik.</p>
+                        <ol>
+                            <li>Masuk ke menu <strong>PENGATURAN > Update Sistem</strong>.</li>
+                            <li>Klik <strong>"Cek Pembaruan"</strong>.</li>
+                            <li>Jika muncul teks <span class="badge badge-info">Terdapat X pembaruan tersedia</span>, barulah klik tombol hijau <strong>"Perbarui Sistem"</strong>.</li>
+                            <li>Sistem akan melakukan penarikan kode (git pull) secara aman.</li>
+                        </ol>
+                        <div class="alert alert-danger py-2 mt-3">
+                            <small><i class="fas fa-exclamation-circle mr-1"></i> Jangan mematikan koneksi internet saat proses update sedang berjalan.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -270,43 +254,45 @@
 <style>
     .guide-nav .nav-link {
         border-radius: 0;
-        padding: 12px 20px;
+        padding: 15px 20px;
         color: #495057;
         font-weight: 500;
         border-bottom: 1px solid rgba(0,0,0,.05);
+        transition: all 0.3s;
     }
-    .guide-nav .nav-link:last-child {
-        border-bottom: none;
+    .guide-nav .nav-link:hover {
+        background-color: #f1f3f5;
     }
     .guide-nav .nav-link.active {
-        background-color: #f8f9fa;
+        background-color: #fff;
         color: #007bff;
-        border-left: 4px solid #007bff;
+        border-left: 5px solid #007bff;
+        font-weight: 700;
+        box-shadow: 2px 0 5px rgba(0,0,0,0.05);
     }
     .tab-content {
         background: #fff;
         border-radius: 8px;
-        min-height: 500px;
+        min-height: 600px;
+        padding: 10px;
     }
-    .card-header.pointer {
-        cursor: pointer;
-        transition: background 0.2s;
+    .card-header {
+        border-bottom: 1px solid rgba(0,0,0,.05) !important;
+        margin-bottom: 15px;
     }
-    .card-header.pointer:hover {
-        background: #f8f9fa !important;
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-top: 10px;
     }
-    .timeline::before {
-        left: 31px;
-        width: 2px;
+    code {
+        background: #f8f9fa;
+        padding: 2px 5px;
+        border-radius: 4px;
+        color: #e83e8c;
     }
-    .timeline > div > .timeline-item {
-        margin-left: 60px;
-    }
-    .timeline > div > i {
-        left: 18px;
-        width: 30px;
-        height: 30px;
-        line-height: 30px;
+    .sticky-top {
+        z-index: 1020;
     }
 </style>
 @stop
