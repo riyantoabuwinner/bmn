@@ -84,10 +84,12 @@
 
 @section('js')
 <script>
-    $(document).ready(function() {
+        let systemUpToDate = false;
+
         $('#btnCheck').click(function() {
             const btn = $(this);
             btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Mengecek...');
+            systemUpToDate = false;
             
             $.post('{{ route("system.update.check") }}', {
                 _token: '{{ csrf_token() }}'
@@ -102,18 +104,20 @@
                     
                     if (data.status.behind > 0) {
                         $('#behindCount').text(data.status.behind);
-                        $('#updateAlert').fadeIn();
+                        $('#updateAlert').show();
                         $('#noUpdateAlert').hide();
-                        $('#btnUpdate').fadeIn();
+                        $('#btnUpdate').show();
+                        systemUpToDate = false;
                     } else {
                         $('#updateAlert').hide();
-                        $('#noUpdateAlert').fadeIn();
+                        $('#noUpdateAlert').show();
                         $('#btnUpdate').hide();
+                        systemUpToDate = true;
                         toastr.success('Sistem sudah menggunakan versi terbaru.');
                     }
                     
                     if (data.has_migrations) {
-                        $('#migrationAlert').fadeIn();
+                        $('#migrationAlert').show();
                     } else {
                         $('#migrationAlert').hide();
                     }
@@ -132,9 +136,7 @@
                 toastr.error('Gagal menghubungi server.');
             })
             .always(function() {
-                // If it was up-to-date, keep it disabled with a check icon
-                const isUpToDate = $('#noUpdateAlert').is(':visible');
-                if (isUpToDate) {
+                if (systemUpToDate) {
                     btn.prop('disabled', true).html('<i class="fas fa-check mr-1"></i> Terverifikasi Terbaru');
                 } else {
                     btn.prop('disabled', false).html('<i class="fas fa-search mr-1"></i> Cek Pembaruan');
