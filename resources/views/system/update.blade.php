@@ -132,7 +132,13 @@
                 toastr.error('Gagal menghubungi server.');
             })
             .always(function() {
-                btn.prop('disabled', false).html('<i class="fas fa-search mr-1"></i> Cek Pembaruan');
+                // If it was up-to-date, keep it disabled with a check icon
+                const isUpToDate = $('#noUpdateAlert').is(':visible');
+                if (isUpToDate) {
+                    btn.prop('disabled', true).html('<i class="fas fa-check mr-1"></i> Terverifikasi Terbaru');
+                } else {
+                    btn.prop('disabled', false).html('<i class="fas fa-search mr-1"></i> Cek Pembaruan');
+                }
             });
         });
 
