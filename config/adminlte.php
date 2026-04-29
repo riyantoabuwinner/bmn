@@ -530,7 +530,7 @@ return [
             'text' => 'Update Sistem',
             'route' => 'system.update.index',
             'icon' => 'fas fa-fw fa-sync-alt',
-            'role' => ['superadmin'],
+            'role' => ['superadmin', 'admin'],
         ],
         [
             'text' => 'Log Aktivitas',
