@@ -34,5 +34,6 @@
         </div>
 
         <x-accessibility-widget />
+        <x-ai-chat-bot />
     </body>
 </html>

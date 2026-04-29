@@ -406,7 +406,7 @@
             right: 20px !important;
             width: 50px !important;
             height: 50px !important;
-            background-color: #10b981 !important;
+            background-color: #2563eb !important;
             border: 3px solid white !important;
             border-radius: 50% !important;
             z-index: 10001 !important;
@@ -947,106 +947,8 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>AOS.init({ duration: 800, once: true });</script>
-    <!-- AI Assistant Chat Bot Bubble -->
-    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed !important; bottom: 20px !important; right: 20px !important; width: 50px !important; height: 50px !important; background: #f59e0b !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; color: white !important; font-size: 22px !important; cursor: pointer !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 10000 !important; transition: 0.3s !important; border: 3px solid white !important;">
-        <i class="fas fa-robot"></i>
-        <div style="position: absolute; top: -2px; right: -2px; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
-    </div>
-
-    <!-- AI Chat Window -->
-    <div id="ai-chat-window" style="position: fixed !important; bottom: 85px !important; right: 20px !important; width: 380px !important; height: 550px !important; background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(15px) !important; border-radius: 25px !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important; display: none; flex-direction: column !important; z-index: 10001 !important; overflow: hidden !important; border: 1px solid rgba(255,255,255,0.5) !important; animation: slideUp 0.4s ease !important;">
-        <!-- Chat Header -->
-        <div style="background: linear-gradient(135deg, #1e1b4b, #4338ca); padding: 25px; color: white; display: flex; align-items: center; justify-content: space-between;">
-            <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="width: 45px; height: 45px; background: rgba(255,255,255,0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px;">
-                    <i class="fas fa-robot"></i>
-                </div>
-                <div>
-                    <h4 style="margin: 0; font-weight: 700;">BMN Core! AI</h4>
-                    <small style="opacity: 0.8; font-size: 0.75rem;"><i class="fas fa-circle" style="color: #10b981; font-size: 8px; margin-right: 5px;"></i> Online | Asisten Pintar</small>
-                </div>
-            </div>
-            <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer; font-size: 20px;"><i class="fas fa-times"></i></button>
-        </div>
-
-        <!-- Chat Body -->
-        <div id="chat-messages" style="flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; background: rgba(248, 250, 252, 0.5);">
-            <div style="background: #eef2ff; padding: 15px; border-radius: 18px 18px 18px 5px; max-width: 85%; align-self: flex-start; font-size: 0.9rem; color: #1e1b4b; line-height: 1.5; border: 1px solid #e0e7ff;">
-                Halo! Saya <strong>BMN Core! AI</strong>. Ada yang bisa saya bantu terkait pengelolaan Barang Milik Negara atau regulasi aplikasi ini?
-            </div>
-        </div>
-
-        <!-- Chat Input -->
-        <div style="padding: 20px; background: white; border-top: 1px solid #f1f5f9;">
-            <div style="display: flex; gap: 10px; background: #f8fafc; padding: 10px; border-radius: 15px; border: 1px solid #e2e8f0;">
-                <input type="text" id="user-input" placeholder="Tanya sesuatu..." style="flex: 1; background: none; border: none; outline: none; padding: 5px 10px; font-size: 0.9rem;" onkeypress="if(event.key === 'Enter') sendMessage()">
-                <button onclick="sendMessage()" style="background: #4338ca; color: white; border: none; width: 40px; height: 40px; border-radius: 10px; cursor: pointer; transition: 0.3s;"><i class="fas fa-paper-plane"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <style>
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        #ai-chat-bubble:hover { transform: scale(1.1) rotate(5deg); }
-        .typing-indicator { font-style: italic; font-size: 0.8rem; color: #64748b; margin-bottom: 5px; }
-    </style>
-
-    <script>
-        function toggleChat() {
-            const chatWindow = document.getElementById('ai-chat-window');
-            chatWindow.style.display = chatWindow.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        const aiKnowledge = {
-            "apa itu bmn core": "BMN Core! adalah platform manajemen aset digital terpusat untuk UIN Siber Syekh Nurjati Cirebon yang mengelola siklus hidup Barang Milik Negara.",
-            "fitur": "Fitur kami meliputi Master Data & Organisasi, Manajemen Aset Tetap, Aset Lancar, Perencanaan (RKBMN), Wasdal, dan Monitoring Laporan.",
-            "regulasi": "Aplikasi ini mengikuti regulasi pengelolaan BMN terbaru dari Kemenkeu dan dioptimalkan untuk integrasi SIMAN v2.",
-            "rkbmn": "Modul RKBMN digunakan untuk merencanakan kebutuhan aset secara strategis dan efisien setiap tahun anggaran.",
-            "cara daftar": "Anda bisa menekan tombol 'Daftar' di navbar untuk membuat akun sebagai operator unit atau pengelola pusat.",
-            "kontak": "Anda bisa menghubungi kami melalui email pustikom@syekhnurjati.ac.id atau langsung ke kantor PUSTIKOM Lantai 2.",
-            "wasdal": "Wasdal (Pengawasan dan Pengendalian) memastikan setiap aset digunakan sesuai peruntukannya dan tercatat status hukumnya."
-        };
-
-        function sendMessage() {
-            const input = document.getElementById('user-input');
-            const message = input.value.trim();
-            if (!message) return;
-
-            // Add user message
-            appendMessage('user', message);
-            input.value = '';
-
-            // AI Processing
-            setTimeout(() => {
-                const response = getAIResponse(message.toLowerCase());
-                appendMessage('ai', response);
-            }, 800);
-        }
-
-        function getAIResponse(query) {
-            for (let key in aiKnowledge) {
-                if (query.includes(key)) return aiKnowledge[key];
-            }
-            return "Maaf, saya belum memahami pertanyaan tersebut. Bisa Anda tanyakan tentang Fitur, RKBMN, Regulasi, atau Cara Daftar?";
-        }
-
-        function appendMessage(sender, text) {
-            const container = document.getElementById('chat-messages');
-            const msgDiv = document.createElement('div');
-            
-            if (sender === 'user') {
-                msgDiv.style.cssText = "background: #4338ca; color: white; padding: 15px; border-radius: 18px 18px 5px 18px; max-width: 85%; align-self: flex-end; font-size: 0.9rem; line-height: 1.5; box-shadow: 0 4px 10px rgba(67, 56, 202, 0.2);";
-            } else {
-                msgDiv.style.cssText = "background: #eef2ff; color: #1e1b4b; padding: 15px; border-radius: 18px 18px 18px 5px; max-width: 85%; align-self: flex-start; font-size: 0.9rem; line-height: 1.5; border: 1px solid #e0e7ff;";
-            }
-            
-            msgDiv.innerHTML = text;
-            container.appendChild(msgDiv);
-            container.scrollTop = container.scrollHeight;
-        }
-    </script>
+    <x-ai-chat-bot />
+</body>
+</html>
 </body>
 </html>

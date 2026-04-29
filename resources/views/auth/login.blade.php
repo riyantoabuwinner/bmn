@@ -224,10 +224,33 @@
             .login-form-side { width: 100%; padding: 40px; }
             .login-image-side { display: none; }
         }
+        /* Force Accessibility Button Position */
+        .acc-widget-btn {
+            position: fixed !important;
+            bottom: 90px !important;
+            right: 20px !important;
+            width: 50px !important;
+            height: 50px !important;
+            background-color: #2563eb !important;
+            border: 3px solid white !important;
+            border-radius: 50% !important;
+            z-index: 10001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: white !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+        }
+        .acc-menu {
+            bottom: 150px !important;
+            z-index: 10002 !important;
+        }
     </style>
 @stop
 
 @section('body')
+    <x-accessibility-widget />
+    <x-ai-chat-bot />
     <div class="login-container">
         <!-- Left Side: Form -->
         <div class="login-form-side">

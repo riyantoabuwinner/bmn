@@ -57,11 +57,11 @@ body.acc-no-animations *:after {
     position: fixed;
     bottom: 90px !important;
     right: 20px !important;
-    z-index: 10000 !important;
+    z-index: 10001 !important;
     width: 50px !important;
     height: 50px !important;
     border-radius: 50% !important;
-    background-color: #10b981 !important;
+    background-color: #2563eb !important;
     color: white !important;
     display: flex !important;
     align-items: center !important;
