@@ -83,4 +83,4 @@ Untuk memastikan stabilitas saat mengunggah ribuan data:
 Aplikasi ini mengusung tema **Modern AdminLTE** dengan kustomisasi CSS yang elegan, fokus pada keterbacaan data, dan transisi yang halus untuk pengalaman pengguna yang premium.
 
 ---
-© 2026 Developed with ❤️ for Government Asset Excellence.
+© 2026 Developed with ❤️ by **Riyanto Abu Winner** for Government Asset Excellence.
