@@ -35,7 +35,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="#asset-lancar" class="nav-link" data-toggle="pill">
-                            <i class="fas fa-boxes mr-2"></i> 5. Aset Lancar (Persediaan)
+                            <i class="fas fa-boxes mr-2"></i> 5. Pengelolaan Aset Lancar
                         </a>
                     </li>
                     <li class="nav-item">
@@ -216,33 +216,60 @@
                 </div>
             </div>
 
-            <!-- 5. Aset Lancar -->
+            <!-- 5. Pengelolaan Aset Lancar (Persediaan) -->
             <div class="tab-pane fade" id="asset-lancar">
                 <div class="card border-0">
                     <div class="card-header bg-white">
-                        <h3 class="card-title font-weight-bold text-primary">5. Aset Lancar (Persediaan)</h3>
+                        <h3 class="card-title font-weight-bold text-primary">5. Pengelolaan Aset Lancar</h3>
                     </div>
                     <div class="card-body">
-                        <p>Mengelola pergerakan stok barang habis pakai.</p>
+                        <p class="small text-muted">Digunakan untuk mengelola sirkulasi barang habis pakai (gudang persediaan).</p>
 
                         <div class="text-center mb-4">
                             <img src="{{ asset('img/guide/aset_lancar_detail.png') }}" class="img-fluid rounded shadow-sm border" alt="Current Asset Form">
-                            <p class="small text-muted mt-2">Gambar 5.1: Form Transaksi Stok Persediaan</p>
+                            <p class="small text-muted mt-2">Gambar 5.1: Antarmuka Transaksi Persediaan</p>
                         </div>
 
-                        <h6><strong>Langkah Kelola Stok:</strong></h6>
-                        <ol class="small">
-                            <li>Buka menu <strong>Transaksi Persediaan</strong>.</li>
-                            <li>Klik <strong>"Tambah Transaksi"</strong>.</li>
-                            <li><strong>Jenis Transaksi:</strong>
-                                <ul>
-                                    <li><strong>Masuk:</strong> Untuk stok baru (pembelian/hibah). Stok akan bertambah.</li>
-                                    <li><strong>Keluar:</strong> Untuk pemakaian (diambil pegawai). Stok akan berkurang.</li>
-                                </ul>
-                            </li>
-                            <li>Pilih <strong>Barang</strong> > Isi <strong>Jumlah</strong> > Isi <strong>Keterangan</strong> (misal: "Untuk kebutuhan ATK Fakultas").</li>
-                            <li>Klik <strong>Simpan</strong>.</li>
-                        </ol>
+                        <div class="accordion" id="guideAsetLancar">
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockIn">
+                                    <h6 class="mb-0">A. Mencatat Barang Masuk (Stok Baru)</h6>
+                                </div>
+                                <div id="stepStockIn" class="collapse show" data-parent="#guideAsetLancar">
+                                    <div class="card-body">
+                                        <p class="small">Gunakan ini saat ada pembelian barang baru atau kiriman dari pusat.</p>
+                                        <ol class="small">
+                                            <li>Buka menu <strong>PENGELOLAAN ASET LANCAR > Transaksi Persediaan</strong>.</li>
+                                            <li>Klik tombol hijau <strong>"Tambah Transaksi"</strong>.</li>
+                                            <li><strong>Pilih Jenis:</strong> Pilih <span class="badge badge-success">Masuk</span>.</li>
+                                            <li><strong>Pilih Barang:</strong> Cari nama barang (misal: Kertas A4).</li>
+                                            <li>Isi <strong>Jumlah (Qty)</strong> yang masuk dan <strong>Harga Satuan</strong>.</li>
+                                            <li>Klik <strong>Simpan</strong>. Saldo stok akan bertambah otomatis.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepStockOut">
+                                    <h6 class="mb-0">B. Mencatat Barang Keluar (Pemakaian Pegawai)</h6>
+                                </div>
+                                <div id="stepStockOut" class="collapse" data-parent="#guideAsetLancar">
+                                    <div class="card-body">
+                                        <p class="small">Gunakan ini saat ada pegawai atau unit yang meminta barang.</p>
+                                        <ol class="small">
+                                            <li>Klik tombol <strong>"Tambah Transaksi"</strong> lagi.</li>
+                                            <li><strong>Pilih Jenis:</strong> Pilih <span class="badge badge-danger">Keluar</span>.</li>
+                                            <li>Pilih barang yang diambil. Sistem akan menolak jika jumlah yang diminta melebihi stok yang ada.</li>
+                                            <li>Isi <strong>Keterangan:</strong> Tulis nama pengambil atau unit kerja (Contoh: "Diambil oleh Bpk. Budi - Bagian Umum").</li>
+                                            <li>Klik <strong>Simpan</strong>. Stok gudang akan berkurang secara real-time.</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light border-top">
+                        <small class="text-info"><i class="fas fa-info-circle mr-1"></i> <strong>Tips:</strong> Selalu lakukan pengecekan stok fisik sebulan sekali untuk memastikan kecocokan dengan data di aplikasi ini.</small>
                     </div>
                 </div>
             </div>
