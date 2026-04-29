@@ -237,8 +237,7 @@
                         <img src="{{ asset('img/logo_uinssc.png') }}" alt="Logo" style="height: 55px; width: auto;">
                     </div>
                     <h2 class="notranslate" translate="no" style="font-weight: 800; letter-spacing: -1px; font-size: 32px; color: #1e1b4b;"><span class="bmn-fixed"></span> <span class="core-fixed" style="color: #dc2626 !important; font-style: italic !important;"></span></h2>
-                    <p class="notranslate" translate="no" style="color: #6366f1; font-weight: 500; font-size: 13px; margin-bottom: 5px;">Centralized Organization of Resource Ecosystem for <span class="bmn-fixed"></span></p>
-                    <p class="notranslate" translate="no" style="color: #94a3b8; font-size: 12px; margin-bottom: 30px;">UIN <span class="siber-fixed"></span> Syekh Nurjati Cirebon</p>
+                    <p class="notranslate" translate="no" style="background: linear-gradient(135deg, #4338ca, #7C3AED); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; font-size: 15px; margin-bottom: 30px; text-transform: uppercase;"><span class="instansi-fixed"></span></p>
                 </div>
 
             @if (session('status'))
@@ -310,6 +309,7 @@
                     .bmn-fixed::after { content: "BMN"; }
                     .siber-fixed::after { content: "Siber"; }
                     .core-fixed::after { content: "Core!"; color: #dc2626 !important; font-style: italic !important; }
+                    .instansi-fixed::after { content: "UIN Siber Syekh Nurjati Cirebon"; }
                 </style>
                 <p class="text-center mt-4 text-muted" style="font-size: 13px;">
                     &copy; 2026 PUSTIKOM <span class="notranslate" translate="no">UIN Syekh Nurjati Cirebon</span>. All Rights Reserved.
@@ -344,11 +344,8 @@
                 </div>
                      
                 <h1 class="hero-title notranslate" translate="no" style="font-size: 52px;"><span class="bmn-fixed"></span> <span class="core-fixed" style="color: #dc2626 !important; font-style: italic !important;"></span></h1>
-                <p class="hero-subtitle notranslate" translate="no" style="font-weight: 600; font-size: 20px; margin-bottom: 10px;">
-                    Centralized Organization of Resource Ecosystem for <span class="bmn-fixed"></span>
-                </p>
-                <p class="notranslate" translate="no" style="font-size: 16px; opacity: 0.8; letter-spacing: 1px;">
-                    UIN <span class="siber-fixed"></span> Syekh Nurjati Cirebon
+                <p class="notranslate" translate="no" style="font-size: 22px; opacity: 1; font-weight: 800; letter-spacing: 0.5px; background: linear-gradient(135deg, #A5B4FC, #C4B5FD); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase;">
+                    <span class="instansi-fixed"></span>
                 </p>
             </div>
         </div>

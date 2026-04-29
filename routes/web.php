@@ -195,4 +195,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [App\Http\Controllers\ProfileController::class , 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/fitur/{slug}', [App\Http\Controllers\FeatureController::class, 'show'])->name('features.show');
+
 require __DIR__ . '/auth.php';

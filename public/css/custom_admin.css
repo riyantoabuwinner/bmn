@@ -36,3 +36,17 @@
     color: #fff !important;
     box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
 }
+
+/* Branding Protected Terms */
+.bmn-fixed::after { content: "BMN"; }
+.siber-fixed::after { content: "Siber"; }
+.brand-link .core-fixed::after,
+.navbar-brand .core-fixed::after,
+.logo .core-fixed::after,
+.core-fixed::after { 
+    content: "Core!" !important; 
+    color: #dc2626 !important; 
+    -webkit-text-fill-color: #dc2626 !important;
+    font-style: italic !important; 
+}
+
