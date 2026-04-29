@@ -32,10 +32,16 @@
                         <span class="mr-4 text-sm">Hash: <strong>{{ $status['hash'] }}</strong></span>
                         <span class="text-sm">Tanggal: <strong>{{ $status['date'] }}</strong></span>
                     </div>
+                    <div id="noUpdateAlert" class="mt-2" style="display: none;">
+                        <div class="alert alert-success py-2 mb-0">
+                            <i class="fas fa-check-circle mr-2"></i> 
+                            Sistem sudah menggunakan versi terbaru (Up-to-date).
+                        </div>
+                    </div>
                     <div id="updateAlert" class="mt-2" style="display: none;">
                         <div class="alert alert-info py-2 mb-0">
                             <i class="fas fa-info-circle mr-2"></i> 
-                            Terdapat <strong id="behindCount">0</strong> commit baru di repository. Silakan klik tombol <strong>Perbarui Sistem</strong>.
+                            Terdapat <strong id="behindCount">0</strong> pembaruan baru tersedia di repository. Silakan klik tombol <strong>Perbarui Sistem</strong>.
                         </div>
                     </div>
                     <div id="migrationAlert" class="mt-2" style="display: none;">
@@ -97,9 +103,11 @@
                     if (data.status.behind > 0) {
                         $('#behindCount').text(data.status.behind);
                         $('#updateAlert').fadeIn();
+                        $('#noUpdateAlert').hide();
                         $('#btnUpdate').fadeIn();
                     } else {
                         $('#updateAlert').hide();
+                        $('#noUpdateAlert').fadeIn();
                         $('#btnUpdate').hide();
                         toastr.success('Sistem sudah menggunakan versi terbaru.');
                     }
