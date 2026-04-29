@@ -298,13 +298,13 @@
         AOS.init({ duration: 800, once: true });
     </script>
     <!-- AI Assistant Chat Bot Bubble -->
-    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); z-index: 9999; transition: 0.3s; border: 3px solid white;">
+    <div id="ai-chat-bubble" onclick="toggleChat()" style="position: fixed !important; bottom: 20px !important; right: 20px !important; width: 50px !important; height: 50px !important; background: #f59e0b !important; border-radius: 50% !important; display: flex !important; align-items: center !important; justify-content: center !important; color: white !important; font-size: 22px !important; cursor: pointer !important; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; z-index: 10000 !important; transition: 0.3s !important; border: 3px solid white !important;">
         <i class="fas fa-robot"></i>
         <div style="position: absolute; top: -2px; right: -2px; width: 12px; height: 12px; background: #10b981; border-radius: 50%; border: 2px solid white;"></div>
     </div>
 
     <!-- AI Chat Window -->
-    <div id="ai-chat-window" style="position: fixed; bottom: 85px; right: 20px; width: 350px; height: 500px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(15px); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); display: none; flex-direction: column; z-index: 9999; overflow: hidden; border: 1px solid rgba(255,255,255,0.5); animation: slideUp 0.4s ease;">
+    <div id="ai-chat-window" style="position: fixed !important; bottom: 85px !important; right: 20px !important; width: 350px !important; height: 500px !important; background: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(15px) !important; border-radius: 20px !important; box-shadow: 0 20px 50px rgba(0,0,0,0.15) !important; display: none; flex-direction: column !important; z-index: 10001 !important; overflow: hidden !important; border: 1px solid rgba(255,255,255,0.5) !important; animation: slideUp 0.4s ease !important;">
         <div style="background: linear-gradient(135deg, #1e1b4b, #4338ca); padding: 20px; color: white; display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 10px;">
                 <i class="fas fa-robot" style="font-size: 20px;"></i>
