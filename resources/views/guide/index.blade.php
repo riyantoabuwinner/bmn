@@ -67,7 +67,7 @@
                         <p>Selamat datang di sistem manajemen BMN. Setelah Anda login, Anda akan disuguhkan halaman Dashboard yang memberikan ringkasan kondisi aset secara real-time.</p>
                         
                         <div class="text-center mb-4">
-                            <img src="{{ asset('artifacts/bmn_real_app_mockup_1777442161051.png') }}" class="img-fluid rounded shadow-sm border" alt="Dashboard View">
+                            <img src="{{ asset('img/guide/dashboard.png') }}" class="img-fluid rounded shadow-sm border" alt="Dashboard View">
                             <p class="small text-muted mt-2">Gambar 1.1: Tampilan Dashboard Utama</p>
                         </div>
 
@@ -123,7 +123,7 @@
                         <p>Modul ini adalah jantung dari aplikasi untuk mencatat semua Barang Milik Negara.</p>
                         
                         <div class="text-center mb-4">
-                            <img src="{{ asset('artifacts/bmn_app_header_1777442019144.png') }}" class="img-fluid rounded shadow-sm border" alt="Asset Header">
+                            <img src="{{ asset('img/guide/header.png') }}" class="img-fluid rounded shadow-sm border" alt="Asset Header">
                             <p class="small text-muted mt-2">Gambar 3.1: Menu Akses Aset Tetap</p>
                         </div>
 
@@ -154,7 +154,7 @@
                         <p>Fitur ini memungkinkan Anda memasukkan ribuan data dalam hitungan menit.</p>
 
                         <div class="text-center mb-4">
-                            <img src="{{ asset('artifacts/guide_asset_import_ui_1777457673044.png') }}" class="img-fluid rounded shadow-sm border" alt="Import UI">
+                            <img src="{{ asset('img/guide/import_ui.png') }}" class="img-fluid rounded shadow-sm border" alt="Import UI">
                             <p class="small text-muted mt-2">Gambar 4.1: Antarmuka Proses Import Data</p>
                         </div>
 
@@ -209,7 +209,7 @@
                         <p>Sistem ini terintegrasi dengan QR Code untuk audit fisik yang cepat.</p>
 
                         <div class="text-center mb-4">
-                            <img src="{{ asset('artifacts/guide_qr_scanner_ui_1777457700315.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
+                            <img src="{{ asset('img/guide/qr_scanner.png') }}" class="img-fluid rounded shadow-sm border" alt="QR Scanner">
                             <p class="small text-muted mt-2">Gambar 6.1: Proses Pemindaian QR Code Aset</p>
                         </div>
 
