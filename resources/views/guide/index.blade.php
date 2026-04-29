@@ -232,10 +232,9 @@
                                     <div class="card-body">
                                         <p>Setiap aset wajib memiliki status penggunaan yang sah.</p>
                                         <ol>
-                                            <li>Menu: <strong>PENGELOLAAN ASET TETAP > Penetapan Status (PSP)</strong>.</li>
+                                            <li>Menu: <strong>Penetapan Status (PSP)</strong>.</li>
                                             <li>Pilih aset yang belum berstatus PSP.</li>
-                                            <li>Input nomor SK PSP dan tanggal penetapannya.</li>
-                                            <li>Unggah dokumen SK dalam format PDF sebagai arsip digital.</li>
+                                            <li>Input nomor SK PSP dan unggah dokumen SK (PDF).</li>
                                         </ol>
                                     </div>
                                 </div>
@@ -246,25 +245,50 @@
                                 </div>
                                 <div id="stepDist" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <p>Mencatat perpindahan tangan atau penanggung jawab aset.</p>
                                         <ol>
-                                            <li>Gunakan menu <strong>Distribusi Aset</strong> untuk memindahkan aset antar ruangan/unit.</li>
-                                            <li>Gunakan <strong>Pemegang Aset (BAST)</strong> untuk mencatat personil yang memegang aset perorangan (seperti Laptop/HP).</li>
-                                            <li>Cetak Berita Acara Serah Terima (BAST) langsung dari sistem sebagai bukti fisik.</li>
+                                            <li><strong>Distribusi Aset:</strong> Mencatat perpindahan aset antar ruangan atau unit kerja.</li>
+                                            <li><strong>Pemegang Aset (BAST):</strong> Mencatat personil penanggung jawab aset perorangan.</li>
+                                            <li>Sistem akan menghasilkan form BAST yang bisa langsung dicetak.</li>
                                         </ol>
                                     </div>
                                 </div>
                             </div>
                             <div class="card mb-2 shadow-none border">
-                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaintenance">
-                                    <h6 class="mb-0">C. Maintenance & Evaluasi</h6>
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepBorrow">
+                                    <h6 class="mb-0">C. Peminjaman & Pemanfaatan</h6>
                                 </div>
-                                <div id="stepMaintenance" class="collapse" data-parent="#guideManagement">
+                                <div id="stepBorrow" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <p>Menjaga kondisi aset tetap prima.</p>
                                         <ul>
-                                            <li><strong>Maintenance Aset:</strong> Catat setiap kali ada perbaikan (servis AC, ganti oli mobil, dll) beserta biayanya.</li>
-                                            <li><strong>Evaluasi Berkala:</strong> Lakukan pengecekan kondisi fisik setiap 6 bulan sekali untuk memastikan data sistem sesuai dengan fakta lapangan.</li>
+                                            <li><strong>Peminjaman Aset:</strong> Digunakan untuk peminjaman aset jangka pendek (misal: proyektor untuk rapat).</li>
+                                            <li><strong>Pemanfaatan Aset:</strong> Pengelolaan aset yang disewakan atau dikerjasamakan dengan pihak ketiga (mitra).</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaint">
+                                    <h6 class="mb-0">D. Maintenance & Evaluasi Berkala</h6>
+                                </div>
+                                <div id="stepMaint" class="collapse" data-parent="#guideManagement">
+                                    <div class="card-body">
+                                        <ul>
+                                            <li><strong>Maintenance Aset:</strong> Mencatat riwayat servis dan biaya pemeliharaan.</li>
+                                            <li><strong>Evaluasi Berkala:</strong> Melakukan audit stok/opname fisik secara rutin untuk memastikan aset masih ada di tempatnya.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card mb-2 shadow-none border">
+                                <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepRemove">
+                                    <h6 class="mb-0">E. Pemindahtanganan & Penghapusan</h6>
+                                </div>
+                                <div id="stepRemove" class="collapse" data-parent="#guideManagement">
+                                    <div class="card-body">
+                                        <p>Tahap akhir dari siklus aset.</p>
+                                        <ul>
+                                            <li><strong>Pemindahtanganan:</strong> Mencatat hibah aset ke instansi lain atau penjualan melalui lelang.</li>
+                                            <li><strong>Penghapusan Aset:</strong> Menghapus aset dari daftar inventaris aktif setelah ada SK Penghapusan yang sah.</li>
                                         </ul>
                                     </div>
                                 </div>
