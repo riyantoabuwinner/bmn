@@ -1,0 +1,38 @@
+/* Wrap long menu headers */
+.nav-header-persediaan {
+    white-space: normal !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+    padding-bottom: 0.5rem !important;
+}
+
+/* Force all nav headers to use the RKBMN purple gradient style */
+.nav-header,
+.nav-header-master,
+.nav-header-inventarisasi,
+.nav-header-rkbmn,
+.nav-header-transaksi,
+.nav-header-persediaan,
+.nav-header-wasdal,
+.nav-header-asuransi,
+.nav-header-portofolio,
+.nav-header-pengaturan {
+    white-space: normal !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.8px !important;
+    text-transform: uppercase !important;
+    padding: 1.2rem 1rem 0.6rem !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    background: linear-gradient(135deg, #764ba2, #667eea) !important;
+    color: #fff !important;
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.2);
+}

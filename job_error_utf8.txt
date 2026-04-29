@@ -1,0 +1,22 @@
+﻿
+   Illuminate\Database\QueryException 
+
+  SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause' (Connection: mysql, SQL: select * from `failed_jobs` order by `created_at` desc limit 1)
+
+  at vendor\laravel\framework\src\Illuminate\Database\Connection.php:825
+    821Γûò                     $this->getName(), $query, $this->prepareBindings($bindings), $e
+    822Γûò                 );
+    823Γûò             }
+    824Γûò 
+  Γ₧£ 825Γûò             throw new QueryException(
+    826Γûò                 $this->getName(), $query, $this->prepareBindings($bindings), $e
+    827Γûò             );
+    828Γûò         }
+    829Γûò     }
+
+  1   vendor\laravel\framework\src\Illuminate\Database\Connection.php:407
+      PDOException::("SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created_at' in 'order clause'")
+
+  2   vendor\laravel\framework\src\Illuminate\Database\Connection.php:407
+      PDO::prepare("select * from `failed_jobs` order by `created_at` desc limit 1")
+
