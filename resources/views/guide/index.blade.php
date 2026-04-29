@@ -224,72 +224,105 @@
                         </div>
 
                         <div class="accordion" id="guideManagement">
+                            <!-- A. PSP -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepPSP">
-                                    <h6 class="mb-0">A. Penetapan Status (PSP)</h6>
+                                    <h6 class="mb-0">A. Penetapan Status Penggunaan (PSP)</h6>
                                 </div>
                                 <div id="stepPSP" class="collapse show" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <p>Setiap aset wajib memiliki status penggunaan yang sah.</p>
-                                        <ol>
-                                            <li>Menu: <strong>Penetapan Status (PSP)</strong>.</li>
-                                            <li>Pilih aset yang belum berstatus PSP.</li>
-                                            <li>Input nomor SK PSP dan unggah dokumen SK (PDF).</li>
+                                        <p class="small text-muted">Tujuannya untuk memberikan legalitas penggunaan aset di bawah unit kerja tertentu.</p>
+                                        <ol class="small">
+                                            <li>Buka menu <strong>PENGELOLAAN ASET TETAP > Penetapan Status (PSP)</strong>.</li>
+                                            <li>Anda akan melihat daftar aset yang <strong>"Belum PSP"</strong>.</li>
+                                            <li>Gunakan kotak <strong>Search</strong> untuk mencari aset berdasarkan Nama atau NUP.</li>
+                                            <li>Klik tombol biru <strong>"Proses PSP"</strong> di baris aset yang diinginkan.</li>
+                                            <li>Pada form yang muncul, masukkan <strong>Nomor SK PSP</strong> dan <strong>Tanggal SK</strong> sesuai dokumen fisik.</li>
+                                            <li>Klik area <strong>Upload SK</strong> dan pilih file PDF dokumen SK tersebut.</li>
+                                            <li>Klik <strong>"Simpan Data PSP"</strong>. Status aset akan otomatis berubah menjadi <strong>Terdaftar PSP</strong>.</li>
                                         </ol>
                                     </div>
                                 </div>
                             </div>
+                            
+                            <!-- B. Distribusi -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepDist">
-                                    <h6 class="mb-0">B. Distribusi & Pemegang Aset (BAST)</h6>
+                                    <h6 class="mb-0">B. Distribusi Aset & BAST</h6>
                                 </div>
                                 <div id="stepDist" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <ol>
-                                            <li><strong>Distribusi Aset:</strong> Mencatat perpindahan aset antar ruangan atau unit kerja.</li>
-                                            <li><strong>Pemegang Aset (BAST):</strong> Mencatat personil penanggung jawab aset perorangan.</li>
-                                            <li>Sistem akan menghasilkan form BAST yang bisa langsung dicetak.</li>
+                                        <p class="small text-muted">Digunakan saat barang dipindahkan ke ruangan lain atau diserahkan ke pegawai.</p>
+                                        <ol class="small">
+                                            <li><strong>Distribusi:</strong> Menu <code>Distribusi Aset</code> > Klik <code>Tambah Distribusi</code> > Pilih Aset > Pilih <strong>Ruangan Tujuan</strong> > Simpan.</li>
+                                            <li><strong>Pemegang Aset (BAST):</strong> Menu <code>Pemegang Aset (BAST)</code>.</li>
+                                            <li>Klik tombol <strong>"Serah Terima"</strong>.</li>
+                                            <li>Pilih <strong>Nama Pegawai</strong> dari daftar (User) dan pilih aset yang diserahkan.</li>
+                                            <li>Setelah simpan, klik ikon printer <i class="fas fa-print"></i> untuk <strong>Cetak Berita Acara (BAST)</strong>.</li>
                                         </ol>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- C. Peminjaman -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepBorrow">
-                                    <h6 class="mb-0">C. Peminjaman & Pemanfaatan</h6>
+                                    <h6 class="mb-0">C. Peminjaman & Pemanfaatan Aset</h6>
                                 </div>
                                 <div id="stepBorrow" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <ul>
-                                            <li><strong>Peminjaman Aset:</strong> Digunakan untuk peminjaman aset jangka pendek (misal: proyektor untuk rapat).</li>
-                                            <li><strong>Pemanfaatan Aset:</strong> Pengelolaan aset yang disewakan atau dikerjasamakan dengan pihak ketiga (mitra).</li>
-                                        </ul>
+                                        <h6 class="font-weight-bold small text-primary">Peminjaman (Internal):</h6>
+                                        <ol class="small mb-3">
+                                            <li>Pilih menu <strong>Peminjaman Aset</strong>.</li>
+                                            <li>Klik <strong>"Buat Peminjaman"</strong>. Isi <strong>Nama Peminjam</strong> dan <strong>Estimasi Tanggal Kembali</strong>.</li>
+                                            <li>Sistem akan menandai aset tersebut sedang <strong>"Dipinjam"</strong> sehingga tidak bisa dipinjam oleh orang lain.</li>
+                                        </ol>
+                                        <h6 class="font-weight-bold small text-success">Pemanfaatan (Mitra):</h6>
+                                        <ol class="small">
+                                            <li>Pilih menu <strong>Pemanfaatan Aset</strong>.</li>
+                                            <li>Pilih aset (misal: Aula/Lahan).</li>
+                                            <li>Input data <strong>Nomor Perjanjian/Kontrak</strong> dan <strong>Nilai Sewa</strong>.</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- D. Maintenance -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepMaint">
                                     <h6 class="mb-0">D. Maintenance & Evaluasi Berkala</h6>
                                 </div>
                                 <div id="stepMaint" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <ul>
-                                            <li><strong>Maintenance Aset:</strong> Mencatat riwayat servis dan biaya pemeliharaan.</li>
-                                            <li><strong>Evaluasi Berkala:</strong> Melakukan audit stok/opname fisik secara rutin untuk memastikan aset masih ada di tempatnya.</li>
-                                        </ul>
+                                        <h6 class="font-weight-bold small text-danger">Maintenance (Perbaikan):</h6>
+                                        <ol class="small mb-3">
+                                            <li>Menu <strong>Maintenance Aset</strong> > Klik <strong>"Input Riwayat Servis"</strong>.</li>
+                                            <li>Pilih Aset > Masukkan <strong>Tgl Servis</strong>, <strong>Biaya</strong>, dan <strong>Uraian Perbaikan</strong>.</li>
+                                        </ol>
+                                        <h6 class="font-weight-bold small text-warning">Evaluasi (Audit):</h6>
+                                        <ol class="small">
+                                            <li>Menu <strong>Evaluasi Aset Berkala</strong>.</li>
+                                            <li>Klik <strong>"Mulai Evaluasi"</strong>.</li>
+                                            <li>Pilih Kondisi saat ini (Baik/RR/RB) dan <strong>Upload Foto Fisik</strong> terbaru sebagai bukti.</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- E. Penghapusan -->
                             <div class="card mb-2 shadow-none border">
                                 <div class="card-header p-2 pointer" data-toggle="collapse" data-target="#stepRemove">
                                     <h6 class="mb-0">E. Pemindahtanganan & Penghapusan</h6>
                                 </div>
                                 <div id="stepRemove" class="collapse" data-parent="#guideManagement">
                                     <div class="card-body">
-                                        <p>Tahap akhir dari siklus aset.</p>
-                                        <ul>
-                                            <li><strong>Pemindahtanganan:</strong> Mencatat hibah aset ke instansi lain atau penjualan melalui lelang.</li>
-                                            <li><strong>Penghapusan Aset:</strong> Menghapus aset dari daftar inventaris aktif setelah ada SK Penghapusan yang sah.</li>
-                                        </ul>
+                                        <p class="small text-muted">Proses final untuk aset yang sudah tidak digunakan lagi.</p>
+                                        <ol class="small">
+                                            <li>Buka menu <strong>Penghapusan Aset</strong>.</li>
+                                            <li>Cari aset yang ingin dihapus > Klik <strong>"Ajukan Penghapusan"</strong>.</li>
+                                            <li>Masukkan alasan (Rusak Total/Hilang/Hibah).</li>
+                                            <li>Setelah disetujui, aset akan berpindah ke daftar <strong>Arsip/Aset Non-Aktif</strong>.</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
