@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 
 class SystemUpdateController extends Controller
 {
+    private $gitCmd = null;
+
     public function index()
     {
         $status = $this->getLocalStatus();
@@ -18,15 +21,16 @@ class SystemUpdateController extends Controller
 
     public function check(Request $request)
     {
-        // Set environment variable to prevent git from prompting for input
         putenv('GIT_TERMINAL_PROMPT=0');
         
         $git = $this->getGitCommand();
+        $basePath = base_path();
+        
         // Git Fetch with a 10 second timeout
-        $process = \Illuminate\Support\Facades\Process::path(base_path())->timeout(10)->run("$git fetch origin main");
+        $process = Process::path($basePath)->timeout(10)->run("$git fetch origin main");
         
         if ($process->failed()) {
-            \Log::error("Git Fetch Failed: " . $process->errorOutput());
+            Log::error("Git Fetch Failed: " . $process->errorOutput());
             return response()->json([
                 'success' => false,
                 'message' => 'Gagal mengambil data dari repository (git fetch). Pastikan koneksi internet stabil dan git terinstal di server.',
@@ -34,7 +38,7 @@ class SystemUpdateController extends Controller
             ]);
         }
         
-        $status = $this->getGitStatus();
+        $status = $this->getRemoteStatus();
         $logs = $this->getGitLogs();
         $hasMigrations = $this->checkForNewMigrations();
 
@@ -52,8 +56,10 @@ class SystemUpdateController extends Controller
         putenv('GIT_TERMINAL_PROMPT=0');
         
         $git = $this->getGitCommand();
+        $basePath = base_path();
+        
         // Perform Git Pull with 30s timeout
-        $process = \Illuminate\Support\Facades\Process::path(base_path())->timeout(30)->run("$git pull origin main");
+        $process = Process::path($basePath)->timeout(30)->run("$git pull origin main");
         
         $success = $process->successful();
         
@@ -71,60 +77,74 @@ class SystemUpdateController extends Controller
         ]);
     }
 
+    /**
+     * Find the git executable path. Cached per request.
+     */
     private function getGitCommand()
     {
-        // Try to find git dynamically first
-        $dynamicOutput = trim(shell_exec('where git') ?? '');
-        if (!empty($dynamicOutput)) {
-            $paths = explode("\n", $dynamicOutput);
-            foreach ($paths as $p) {
-                $p = trim($p);
-                if (!empty($p) && file_exists($p)) {
-                    return '"' . $p . '"';
+        if ($this->gitCmd !== null) {
+            return $this->gitCmd;
+        }
+
+        // Check common absolute paths first (fastest)
+        $knownPaths = [
+            'C:\Program Files\Git\cmd\git.exe',
+            'C:\Program Files\Git\bin\git.exe',
+            'C:\Program Files (x86)\Git\cmd\git.exe',
+            '/usr/bin/git',
+            '/usr/local/bin/git',
+        ];
+
+        foreach ($knownPaths as $path) {
+            if (file_exists($path)) {
+                $this->gitCmd = '"' . $path . '"';
+                Log::info("Git resolved to: " . $this->gitCmd);
+                return $this->gitCmd;
+            }
+        }
+
+        // Try 'where' command on Windows
+        $whereOutput = @shell_exec('where git 2>NUL');
+        if (!empty($whereOutput)) {
+            $lines = explode("\n", trim($whereOutput));
+            foreach ($lines as $line) {
+                $line = trim($line);
+                if (!empty($line) && file_exists($line)) {
+                    $this->gitCmd = '"' . $line . '"';
+                    Log::info("Git resolved via 'where': " . $this->gitCmd);
+                    return $this->gitCmd;
                 }
             }
         }
 
-        // Try common paths for Windows if 'git' isn't found in PATH
-        $commonPaths = [
-            'git', // Default in PATH
-            'C:\Program Files\Git\cmd\git.exe',
-            'C:\Program Files\Git\bin\git.exe',
-            'C:\Program Files (x86)\Git\cmd\git.exe',
-            'C:\Program Files (x86)\Git\bin\git.exe',
-            '/usr/bin/git',
-            '/usr/local/bin/git'
-        ];
-
-        foreach ($commonPaths as $path) {
-            $testPath = (str_contains($path, ' ')) ? '"' . $path . '"' : $path;
-            $process = \Illuminate\Support\Facades\Process::run("$testPath --version");
-            if ($process->successful()) {
-                return $testPath;
+        // Try 'which' command on Linux
+        $whichOutput = @shell_exec('which git 2>/dev/null');
+        if (!empty($whichOutput)) {
+            $line = trim($whichOutput);
+            if (!empty($line) && file_exists($line)) {
+                $this->gitCmd = $line;
+                return $this->gitCmd;
             }
         }
 
-        return 'git'; // Fallback to default
+        // Last resort: just try 'git'
+        $this->gitCmd = 'git';
+        return $this->gitCmd;
     }
 
+    /**
+     * Get local-only git status (no remote check). Used for initial page load.
+     */
     private function getLocalStatus()
     {
         $basePath = base_path();
         $git = $this->getGitCommand();
         
         try {
-            $branchProcess = \Illuminate\Support\Facades\Process::path($basePath)->run("$git rev-parse --abbrev-ref HEAD");
-            $hashProcess = \Illuminate\Support\Facades\Process::path($basePath)->run("$git rev-parse --short HEAD");
-            $dateProcess = \Illuminate\Support\Facades\Process::path($basePath)->run("$git log -1 --format=%cd --date=relative");
-            
-            if ($branchProcess->failed()) {
-                \Log::warning("Git Status Failed. Command: $git. Error: " . $branchProcess->errorOutput());
-            }
+            $branch = trim(Process::path($basePath)->run("$git rev-parse --abbrev-ref HEAD")->output() ?: 'unknown');
+            $hash = trim(Process::path($basePath)->run("$git rev-parse --short HEAD")->output() ?: 'unknown');
+            $date = trim(Process::path($basePath)->run("$git log -1 --format=%cd --date=relative")->output() ?: 'unknown');
 
-            $branch = trim($branchProcess->output() ?: 'unknown');
-            $hash = trim($hashProcess->output() ?: 'unknown');
-            $date = trim($dateProcess->output() ?: 'unknown');
-            
             return [
                 'branch' => $branch,
                 'hash' => $hash,
@@ -132,7 +152,7 @@ class SystemUpdateController extends Controller
                 'behind' => 0
             ];
         } catch (\Exception $e) {
-            \Log::error("Git Local Status Exception: " . $e->getMessage());
+            Log::error("Git Local Status Error: " . $e->getMessage());
             return [
                 'branch' => 'Error',
                 'hash' => 'Error',
@@ -142,21 +162,28 @@ class SystemUpdateController extends Controller
         }
     }
 
-    private function getGitStatus()
+    /**
+     * Get status including remote comparison. Used after git fetch.
+     */
+    private function getRemoteStatus()
     {
         $basePath = base_path();
         $git = $this->getGitCommand();
         
         try {
-            $status = $this->getLocalStatus();
-            
-            // Check if we are behind origin
-            $behindCount = trim(\Illuminate\Support\Facades\Process::path($basePath)->run("$git rev-list HEAD..origin/main --count")->output() ?: '0');
-            $status['behind'] = (int)$behindCount;
+            $branch = trim(Process::path($basePath)->run("$git rev-parse --abbrev-ref HEAD")->output() ?: 'unknown');
+            $hash = trim(Process::path($basePath)->run("$git rev-parse --short HEAD")->output() ?: 'unknown');
+            $date = trim(Process::path($basePath)->run("$git log -1 --format=%cd --date=relative")->output() ?: 'unknown');
+            $behindCount = trim(Process::path($basePath)->run("$git rev-list HEAD..origin/main --count")->output() ?: '0');
 
-            return $status;
+            return [
+                'branch' => $branch,
+                'hash' => $hash,
+                'date' => $date,
+                'behind' => (int)$behindCount
+            ];
         } catch (\Exception $e) {
-            \Log::error("Git Status Error: " . $e->getMessage());
+            Log::error("Git Remote Status Error: " . $e->getMessage());
             return [
                 'branch' => 'Error',
                 'hash' => 'Error',
@@ -169,7 +196,8 @@ class SystemUpdateController extends Controller
     private function getGitLogs()
     {
         $git = $this->getGitCommand();
-        $process = \Illuminate\Support\Facades\Process::run("$git log -n 10 --format=\"%h %s (%cr) <%an>\"");
+        $basePath = base_path();
+        $process = Process::path($basePath)->run("$git log -n 10 --format=\"%h %s (%cr) <%an>\"");
         $output = trim($process->output());
         return $output ? explode("\n", $output) : [];
     }
@@ -177,12 +205,12 @@ class SystemUpdateController extends Controller
     private function checkForNewMigrations()
     {
         $git = $this->getGitCommand();
-        // Cross-platform check for migrations
-        $process = \Illuminate\Support\Facades\Process::run("$git diff --name-only HEAD origin/main");
+        $basePath = base_path();
+        $process = Process::path($basePath)->run("$git diff --name-only HEAD origin/main");
         $files = explode("\n", $process->output());
         
         foreach ($files as $file) {
-            if (str_contains($file, 'database/migrations')) {
+            if (str_contains(trim($file), 'database/migrations')) {
                 return true;
             }
         }
