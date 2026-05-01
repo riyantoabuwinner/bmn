@@ -179,7 +179,7 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 140px 0 80px;
+            padding: 110px 0 110px;
             background: #1e1b4b;
             background-image: 
                 radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
@@ -261,6 +261,7 @@
             min-width: 160px;
         }
 
+        /* ===== Hero 3D Visualization ===== */
         .hero-image {
             position: relative;
             width: 100%;
@@ -268,136 +269,120 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            perspective: 2000px;
+            perspective: 1200px;
         }
 
         .scene {
-            width: 500px;
-            height: 400px;
+            width: 520px;
+            height: 500px;
             position: relative;
             transform-style: preserve-3d;
-            transform: rotateX(60deg) rotateZ(-30deg) translateZ(-50px);
-            animation: floatScene 8s ease-in-out infinite;
         }
 
-        @keyframes floatScene {
-            0%, 100% { transform: rotateX(60deg) rotateZ(-30deg) translateZ(-50px); }
-            50% { transform: rotateX(60deg) rotateZ(-30deg) translateZ(-20px); }
-        }
-
+        /* Platform hidden */
         .platform {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e1b4b, #312e81);
-            border-radius: 40px;
-            box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.5), 0 50px 100px rgba(0,0,0,0.6), inset 0 0 80px rgba(30, 27, 75, 0.8);
-            transform: translateZ(0);
+            display: none;
         }
 
-        .glass-sheet {
+
+        /* Building Image */
+        .building-container {
             position: absolute;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(167, 139, 250, 0.3);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-            transform-style: preserve-3d;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            pointer-events: none;
+            animation: buildingFloat 8s ease-in-out infinite;
         }
 
-        .sheet-1 { width: 90%; height: 90%; top: 5%; left: 5%; transform: translateZ(20px); }
-        .sheet-2 { width: 40%; height: 50%; top: 15%; right: 10%; transform: translateZ(50px); background: rgba(124, 58, 237, 0.1); border: 1px solid rgba(139, 92, 246, 0.4); }
-        .sheet-3 { width: 35%; height: 60%; bottom: 15%; left: 10%; transform: translateZ(40px); background: rgba(79, 70, 229, 0.1); border: 1px solid rgba(99, 102, 241, 0.4); }
+        .building-main {
+            width: 650px;
+            height: auto;
+            display: block;
+            filter: none;
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 95%);
+            mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 95%);
+        }
 
+        /* Gradient overlay removed to eliminate boxy edges */
+        .building-container::before {
+            display: none;
+        }
+
+        /* Blue glow under building - removed */
+        .building-container::after {
+            display: none;
+        }
+
+        @keyframes buildingFloat {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-15px); }
+        }
+
+        /* Floating Icon Badges */
         .floating-icon {
             position: absolute;
-            width: 60px; height: 60px;
-            background: linear-gradient(135deg, #4F46E5, #4338ca);
-            border-radius: 15px;
-            display: flex; justify-content: center; align-items: center;
-            font-size: 24px; color: white; 
-            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.4);
-            transform: translateZ(80px);
-            animation: bounce 4s infinite ease-in-out;
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 22px;
+            color: white;
+            z-index: 20;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            animation: iconFloat 6s ease-in-out infinite;
         }
 
-        .icon-1 { top: -40px; right: 10%; animation-delay: 0s; }
-        .icon-2 { bottom: 10%; left: -50px; animation-delay: 1s; }
-        .icon-3 { top: -20px; left: 45%; transform: translateZ(180px) !important; animation-delay: 2s; }
-        .icon-4 { top: -30px; left: 5%; animation-delay: 0.5s; }
-        .icon-5 { bottom: -30px; right: 5%; animation-delay: 1.5s; }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateZ(80px); }
-            50% { transform: translateZ(100px); }
+        /* Icon Colors matching reference */
+        .icon-1 {
+            background: linear-gradient(135deg, #ec4899, #be185d);
+            top: 90px;
+            left: 15%;
+            animation-delay: 0s;
+        }
+        .icon-2 {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            top: 90px;
+            left: 43%;
+            animation-delay: 0.8s;
+        }
+        .icon-3 {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            top: 180px;
+            left: 53%;
+            animation-delay: 1.6s;
+        }
+        .icon-4 {
+            background: linear-gradient(135deg, #a855f7, #7e22ce);
+            top: 200px;
+            right: 10%;
+            animation-delay: 0.4s;
+        }
+        .icon-5 {
+            background: linear-gradient(135deg, #10b981, #047857);
+            bottom: 220px;
+            left: 5%;
+            animation-delay: 1.2s;
+        }
+        .icon-6 {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            bottom: 180px;
+            right: -5%;
+            animation-delay: 2s;
         }
 
-        /* Skyscraper 3D - Fixed Solid Box Construction */
-        .building-3d {
-            position: absolute;
-            transform-style: preserve-3d;
-            pointer-events: none;
-        }
-        
-        /* Container size = Base (Luas Lantai) */
-        .building-3d.b-1 { width: 60px; height: 60px; bottom: 40%; left: 20%; }
-        .building-3d.b-2 { width: 50px; height: 50px; bottom: 30%; left: 55%; }
-
-        .b-side {
-            position: absolute;
-            background: rgba(30, 27, 75, 0.95);
-            border: 1px solid rgba(255,255,255,0.1);
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(-5px) rotate(-1deg); }
+            75% { transform: translateY(-12px) rotate(1deg); }
         }
 
-        /* Building 1 - Tall */
-        .b-1 .b-front, .b-1 .b-back { width: 60px; height: 280px; }
-        .b-1 .b-left, .b-1 .b-right { width: 60px; height: 280px; }
-        .b-1 .b-top { width: 60px; height: 60px; transform: translateZ(280px); }
-
-        /* Building 2 - Medium */
-        .b-2 .b-front, .b-2 .b-back { width: 50px; height: 180px; }
-        .b-2 .b-left, .b-2 .b-right { width: 50px; height: 180px; }
-        .b-2 .b-top { width: 50px; height: 50px; transform: translateZ(180px); }
-
-        /* Solid Box Logic */
-        .b-front { bottom: 0; transform-origin: bottom; transform: rotateX(-90deg); background: linear-gradient(to top, #1e1b4b, #312e81); }
-        .b-back  { top: 0; transform-origin: top; transform: rotateX(90deg); }
-        .b-left  { bottom: 0; left: 0; transform-origin: bottom left; transform: rotateX(-90deg) rotateY(-90deg); }
-        .b-right { bottom: 0; right: 0; transform-origin: bottom right; transform: rotateX(-90deg) rotateY(90deg); background: #4338ca; }
-        
-        .b-top { top: 0; left: 0; background: #06b6d4; box-shadow: 0 0 40px rgba(6, 182, 212, 0.5); border: 1px solid rgba(255,255,255,0.3); }
-        .b-2 .b-top { background: #a855f7; box-shadow: 0 0 40px rgba(168, 85, 247, 0.5); }
-        .b-2 .b-right { background: #7c3aed; }
-
-        /* Window Patterns */
-        .b-side::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 8px 12px;
-        }
-
-        /* Ikon Warna-Warni (Colorful Icons) */
-        .icon-1 { top: -50px; right: 10%; background: linear-gradient(135deg, #3b82f6, #1d4ed8); } /* Biru Cerah */
-        .icon-2 { bottom: 5%; left: -60px; background: linear-gradient(135deg, #a855f7, #7e22ce); } /* Ungu */
-        .icon-3 { top: -10px; left: 45%; background: linear-gradient(135deg, #ec4899, #be185d); transform: translateZ(200px) !important; } /* Pink/Rose */
-        .icon-4 { top: -40px; left: 5%; background: linear-gradient(135deg, #10b981, #047857); } /* Hijau */
-        .icon-5 { bottom: -40px; right: 5%; background: linear-gradient(135deg, #f59e0b, #d97706); } /* Oranye/Emas */
-
-        .hologram-circle {
-            position: absolute;
-            width: 150px; height: 150px;
-            border: 2px solid rgba(139, 92, 246, 0.5); 
-            border-radius: 50%;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) translateZ(10px);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-            animation: pulseRing 4s infinite linear;
-        }
-
-        @keyframes pulseRing {
-            0%, 100% { transform: translate(-50%, -50%) translateZ(10px) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) translateZ(10px) scale(1.1); opacity: 0.4; }
-        }
+        /* Decorative 3D Cubes - hidden */
+        .small-cube { display: none; }
 
         /* Force Accessibility Button Position */
         .acc-widget-btn {
@@ -710,29 +695,39 @@
             </div>
             <div class="hero-image" data-aos="fade-left">
                 <div class="scene">
+                    <!-- Isometric Platform -->
                     <div class="platform"></div>
-                    <div class="glass-sheet sheet-1"></div>
-                    <div class="glass-sheet sheet-2"></div>
-                    <div class="glass-sheet sheet-3"></div>
-                    <div class="building-3d b-1">
-                        <div class="b-side b-front"></div>
-                        <div class="b-side b-back"></div>
-                        <div class="b-side b-left"></div>
-                        <div class="b-side b-right"></div>
-                        <div class="b-top"></div>
+
+                    <!-- Building on Platform -->
+                    <div class="building-container">
+                        <img src="{{ asset('img/gedungsiber.png') }}" class="building-main" alt="Gedung Siber UINSSC">
                     </div>
-                    <div class="building-3d b-2">
-                        <div class="b-side b-front"></div>
-                        <div class="b-side b-back"></div>
-                        <div class="b-side b-left"></div>
-                        <div class="b-side b-right"></div>
-                        <div class="b-top"></div>
+
+                    <!-- Decorative 3D Cubes -->
+                    <div class="small-cube cube-cyan">
+                        <div class="cube-face f-front"></div>
+                        <div class="cube-face f-back"></div>
+                        <div class="cube-face f-right"></div>
+                        <div class="cube-face f-left"></div>
+                        <div class="cube-face f-top"></div>
+                        <div class="cube-face f-bottom"></div>
                     </div>
-                    <div class="floating-icon icon-1" title="Gedung & Bangunan"><i class="fas fa-building"></i></div>
-                    <div class="floating-icon icon-2" title="Kendaraan Dinas"><i class="fas fa-car"></i></div>
-                    <div class="floating-icon icon-3" title="Perangkat IT"><i class="fas fa-laptop"></i></div>
-                    <div class="floating-icon icon-4" title="Peralatan Kantor"><i class="fas fa-chair"></i></div>
-                    <div class="floating-icon icon-5" title="Distribusi Barang"><i class="fas fa-truck"></i></div>
+                    <div class="small-cube cube-purple">
+                        <div class="cube-face f-front"></div>
+                        <div class="cube-face f-back"></div>
+                        <div class="cube-face f-right"></div>
+                        <div class="cube-face f-left"></div>
+                        <div class="cube-face f-top"></div>
+                        <div class="cube-face f-bottom"></div>
+                    </div>
+
+                    <!-- Floating Colorful Icon Badges -->
+                    <div class="floating-icon icon-1" title="Perangkat IT"><i class="fas fa-laptop"></i></div>
+                    <div class="floating-icon icon-2" title="Server & Data"><i class="fas fa-server"></i></div>
+                    <div class="floating-icon icon-3" title="Gedung & Bangunan"><i class="fas fa-building"></i></div>
+                    <div class="floating-icon icon-4" title="Inventaris"><i class="fas fa-boxes"></i></div>
+                    <div class="floating-icon icon-5" title="Peralatan Kantor"><i class="fas fa-chair"></i></div>
+                    <div class="floating-icon icon-6" title="Kendaraan Dinas"><i class="fas fa-car"></i></div>
                 </div>
             </div>
         </div>
