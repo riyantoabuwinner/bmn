@@ -78,8 +78,8 @@ return [
     ],
 
     'cache' => [
-        'driver' => 'illuminate', 
-        'store'  => 'database', // Changed from redis to database for better compatibility
+        'driver' => 'memory', 
+        'store'  => 'memory', 
         'batch' => [
             'memory_limit' => 60000,
         ],
