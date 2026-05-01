@@ -78,8 +78,8 @@ return [
     ],
 
     'cache' => [
-        'driver' => 'redis', // ENABLED REDIS CACHING TO SAVE RAM
-        'store'  => 'redis',
+        'driver' => 'illuminate', 
+        'store'  => 'database', // Changed from redis to database for better compatibility
         'batch' => [
             'memory_limit' => 60000,
         ],
