@@ -27,9 +27,11 @@ class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, Wit
     public function __construct($importTaskId)
     {
         $this->importTaskId = $importTaskId;
-        // Reduced memory limit slightly to be more realistic, but keeping it high enough
-        ini_set('memory_limit', '1G');
+        ini_set('memory_limit', '1024M');
         set_time_limit(0);
+        
+        // Optimization: Disable query log to save memory
+        DB::connection()->disableQueryLog();
     }
 
     public function collection(Collection $rows)
@@ -102,24 +104,46 @@ class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, Wit
         }
 
         if (!empty($batch)) {
-            Log::info("Processing batch for Task ID: " . ($this->importTaskId ?? 'NULL') . ". Rows: " . count($batch));
-            
-            $updateColumns = array_diff(array_keys($batch[0]), ['unique_asset_id', 'created_at']);
-            Asset::upsert($batch, ['kode_barang', 'nup'], $updateColumns);
+            try {
+                DB::transaction(function () use ($batch) {
+                    $updateColumns = array_diff(array_keys($batch[0]), ['unique_asset_id', 'created_at']);
+                    Asset::upsert($batch, ['kode_barang', 'nup'], $updateColumns);
+                });
+                
+                Log::info("Processed batch of " . count($batch) . " for Task ID: " . $this->importTaskId);
+            } catch (\Exception $e) {
+                Log::error("Error in batch upsert: " . $e->getMessage());
+                throw $e;
+            }
         }
 
-        // Update Progress in DB - Count all rows in chunk to keep progress bar moving
+        // Update Progress in DB
         if ($this->importTaskId) {
-            $affected = ImportTask::where('id', $this->importTaskId)->increment('processed_rows', $rows->count());
-            Log::info("Incremented processed_rows for Task ID: {$this->importTaskId} by {$rows->count()} rows.");
+            ImportTask::where('id', $this->importTaskId)->increment('processed_rows', $rows->count());
         }
+
+        // Explicitly clear memory
+        unset($batch);
+        unset($rows);
+        gc_collect_cycles();
     }
 
     private function parseDate($value)
     {
         if (empty($value)) return null;
         if ($value instanceof \DateTime) return $value->format('Y-m-d');
-        if (is_numeric($value)) return \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)->format('Y-m-d');
+        if (is_numeric($value) && $value > 25569) { // Basic check for Excel date serial
+            try {
+                return \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)->format('Y-m-d');
+            } catch (\Exception $e) {}
+        }
+        
+        // Fast string parse
+        if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $value)) return $value;
+        if (preg_match('/^\d{2}\/\d{2}\/\d{4}$/', $value)) {
+            $parts = explode('/', $value);
+            return "{$parts[2]}-{$parts[1]}-{$parts[0]}";
+        }
         
         try {
             return Carbon::parse($value)->format('Y-m-d');
@@ -130,14 +154,26 @@ class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, Wit
 
     private function parseNumber($value)
     {
-        if (empty($value)) return 0;
-        if (is_numeric($value)) return $value;
-        return (float) str_replace(['.', ','], ['', '.'], $value);
+        if (is_null($value) || $value === '') return 0;
+        if (is_numeric($value)) return (float) $value;
+        
+        // Faster cleaning for currency/formatted strings
+        $cleaned = preg_replace('/[^0-9,.]/', '', $value);
+        if (str_contains($cleaned, ',') && str_contains($cleaned, '.')) {
+            // Likely Indonesian format: 1.234.567,89
+            $cleaned = str_replace('.', '', $cleaned);
+            $cleaned = str_replace(',', '.', $cleaned);
+        } elseif (str_contains($cleaned, ',')) {
+            // Just comma, treat as decimal if no dot
+            $cleaned = str_replace(',', '.', $cleaned);
+        }
+        
+        return is_numeric($cleaned) ? (float) $cleaned : 0;
     }
 
     public function chunkSize(): int
     {
-        return 100; // Reduced from 500 for lower RAM usage per batch
+        return 1000; // Increased for better performance on large datasets
     }
 
     public function endColumn(): string
