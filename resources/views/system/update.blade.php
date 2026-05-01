@@ -124,12 +124,17 @@
                     
                     // Update logs
                     let logHtml = '';
-                    data.logs.forEach(function(log) {
-                        logHtml += log + '\n';
-                    });
-                    $('.bg-dark:eq(0)').text(logHtml);
+                    if (data.logs && Array.isArray(data.logs)) {
+                        data.logs.forEach(function(log) {
+                            logHtml += log + '\n';
+                        });
+                    }
+                    $('.bg-dark:eq(0)').text(logHtml || 'Tidak ada riwayat perubahan.');
                     
-                    $('#executionOutput').text('Pengecekan selesai. ' + (data.status.behind > 0 ? 'Pembaruan tersedia.' : 'Sistem up-to-date.'));
+                    $('#executionOutput').text(data.output || 'Pengecekan selesai. ' + (data.status.behind > 0 ? 'Pembaruan tersedia.' : 'Sistem up-to-date.'));
+                } else {
+                    toastr.error(data.message || 'Gagal mengecek pembaruan.');
+                    $('#executionOutput').text(data.output || 'Gagal mengecek pembaruan. Pastikan git terinstal dan dapat diakses.');
                 }
             })
             .fail(function() {

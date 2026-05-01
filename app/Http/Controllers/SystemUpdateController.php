@@ -26,6 +26,11 @@ class SystemUpdateController extends Controller
         
         if ($process->failed()) {
             \Log::error("Git Fetch Failed: " . $process->errorOutput());
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal mengambil data dari repository (git fetch). Pastikan koneksi internet stabil dan git terinstal di server.',
+                'output' => $process->errorOutput()
+            ]);
         }
         
         $status = $this->getGitStatus();
@@ -37,7 +42,7 @@ class SystemUpdateController extends Controller
             'status' => $status,
             'logs' => $logs,
             'has_migrations' => $hasMigrations,
-            'output' => $process->output() ?: $process->errorOutput()
+            'output' => $process->output() ?: 'Fetch berhasil. Tidak ada output tambahan.'
         ]);
     }
 
@@ -66,33 +71,51 @@ class SystemUpdateController extends Controller
 
     private function getGitStatus()
     {
-        $branch = exec('git rev-parse --abbrev-ref HEAD');
-        $hash = exec('git rev-parse --short HEAD');
-        $date = exec('git log -1 --format=%cd --date=relative');
-        
-        // Check if we are behind origin
-        exec('git rev-list HEAD..origin/main --count', $behindCount);
-        $behindCount = isset($behindCount[0]) ? (int)$behindCount[0] : 0;
+        try {
+            $branch = trim(\Illuminate\Support\Facades\Process::run('git rev-parse --abbrev-ref HEAD')->output() ?: 'unknown');
+            $hash = trim(\Illuminate\Support\Facades\Process::run('git rev-parse --short HEAD')->output() ?: 'unknown');
+            $date = trim(\Illuminate\Support\Facades\Process::run('git log -1 --format=%cd --date=relative')->output() ?: 'unknown');
+            
+            // Check if we are behind origin
+            $behindCount = trim(\Illuminate\Support\Facades\Process::run('git rev-list HEAD..origin/main --count')->output() ?: '0');
+            $behindCount = (int)$behindCount;
 
-        return [
-            'branch' => $branch,
-            'hash' => $hash,
-            'date' => $date,
-            'behind' => $behindCount
-        ];
+            return [
+                'branch' => $branch,
+                'hash' => $hash,
+                'date' => $date,
+                'behind' => $behindCount
+            ];
+        } catch (\Exception $e) {
+            \Log::error("Git Status Error: " . $e->getMessage());
+            return [
+                'branch' => 'Error',
+                'hash' => 'Error',
+                'date' => 'Error',
+                'behind' => 0
+            ];
+        }
     }
 
     private function getGitLogs()
     {
-        exec('git log -n 10 --format="%h %s (%cr) <%an>"', $logs);
-        return $logs;
+        $process = \Illuminate\Support\Facades\Process::run('git log -n 10 --format="%h %s (%cr) <%an>"');
+        $output = trim($process->output());
+        return $output ? explode("\n", $output) : [];
     }
 
     private function checkForNewMigrations()
     {
-        // This is a simple check comparing migration files
-        // In a real git update, we could check if files in database/migrations changed
-        exec('git diff --name-only HEAD origin/main | findstr "database/migrations"', $migrations);
-        return !empty($migrations);
+        // Cross-platform check for migrations
+        $process = \Illuminate\Support\Facades\Process::run('git diff --name-only HEAD origin/main');
+        $files = explode("\n", $process->output());
+        
+        foreach ($files as $file) {
+            if (str_contains($file, 'database/migrations')) {
+                return true;
+            }
+        }
+        
+        return false;
     }
 }
