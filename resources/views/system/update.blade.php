@@ -57,7 +57,7 @@
             <div class="card shadow-sm border-0 mb-4">
                 <div class="card-header bg-white">
                     <h3 class="card-title text-muted">
-                        <i class="far fa-clock mr-2 text-info"></i> Riwayat Perubahan (Git Log)
+                        <i class="far fa-clock mr-2 text-info"></i> Riwayat Perubahan (Sistem Saat Ini)
                     </h3>
                 </div>
                 <div class="card-body p-0">
@@ -75,7 +75,7 @@
                     </h3>
                 </div>
                 <div class="card-body p-0">
-                    <pre id="executionOutput" class="bg-dark text-light p-4 mb-0" style="min-height: 150px; font-family: 'Courier New', Courier, monospace; border-radius: 0 0 4px 4px;">Belum ada output eksekusi terbaru. Silakan tekan tombol "Cek Pembaruan" untuk memulai.</pre>
+                    <pre id="executionOutput" class="bg-dark text-light p-4 mb-0" style="min-height: 150px; font-family: 'Courier New', Courier, monospace; border-radius: 0 0 4px 4px;">Sistem dalam mode standby. Silakan klik tombol "Cek Pembaruan" untuk memeriksa ketersediaan kode terbaru di GitHub.</pre>
                 </div>
             </div>
         </div>
