@@ -8,6 +8,8 @@ use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
+use Maatwebsite\Excel\Concerns\WithColumnLimit;
 use Maatwebsite\Excel\Events\BeforeImport;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Events\ImportFailed;
@@ -18,14 +20,15 @@ use Carbon\Carbon;
 
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, WithEvents, ShouldQueue
+class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, WithEvents, SkipsEmptyRows, WithColumnLimit, ShouldQueue
 {
     public $importTaskId;
 
     public function __construct($importTaskId)
     {
         $this->importTaskId = $importTaskId;
-        ini_set('memory_limit', '2G');
+        // Reduced memory limit slightly to be more realistic, but keeping it high enough
+        ini_set('memory_limit', '1G');
         set_time_limit(0);
     }
 
@@ -134,7 +137,12 @@ class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, Wit
 
     public function chunkSize(): int
     {
-        return 500;
+        return 100; // Reduced from 500 for lower RAM usage per batch
+    }
+
+    public function endColumn(): string
+    {
+        return 'BZ'; // Limit columns to reduce memory footprint
     }
 
     public function registerEvents(): array
@@ -143,18 +151,11 @@ class AssetImport implements ToCollection, WithHeadingRow, WithChunkReading, Wit
             BeforeImport::class => function (BeforeImport $event) {
                 ImportTask::where('id', $this->importTaskId)->update([
                     'status' => 'processing',
-                    'total_rows' => 0 // Will be updated if possible, or just stay 0
+                    'total_rows' => 0 
                 ]);
                 
-                // Try a faster way to get total rows if it doesn't block
-                try {
-                    $totalRows = array_values($event->reader->getTotalRows())[0] - 1;
-                    ImportTask::where('id', $this->importTaskId)->update([
-                        'total_rows' => $totalRows > 0 ? $totalRows : 0
-                    ]);
-                } catch (\Exception $e) {
-                    // Skip counting if it fails or takes too long
-                }
+                // REMOVED getTotalRows() because it kills RAM for large files
+                // We will rely on processed_rows for progress tracking
             },
             AfterImport::class => function (AfterImport $event) {
                 ImportTask::where('id', $this->importTaskId)->update(['status' => 'completed']);

@@ -333,25 +333,28 @@
                     
                     if (elements.bar) {
                         const displayPercentage = data.percentage || 0;
-                        elements.bar.style.width = displayPercentage + '%';
-                        elements.bar.setAttribute('aria-valuenow', displayPercentage);
-                        elements.bar.innerHTML = displayPercentage + '%';
+                        const processedCount = data.processed || 0;
+                        const totalCount = data.total || 0;
+                        
+                        // Use a fallback for progress bar if total is 0
+                        if (totalCount > 0) {
+                            elements.bar.style.width = displayPercentage + '%';
+                            elements.bar.innerHTML = displayPercentage + '%';
+                        } else {
+                            // If total is unknown, just show it's working
+                            elements.bar.style.width = '100%';
+                            elements.bar.innerHTML = 'Memproses...';
+                        }
 
                         if (data.status === 'pending') {
                             if (elements.status) elements.status.innerText = 'Menunggu antrian...';
                             if (elements.details) elements.details.innerText = 'Mempersiapkan data...';
-                        } else if (data.status === 'counting') {
-                            if (elements.status) elements.status.innerText = 'Menganalisis file...';
-                            if (elements.details) elements.details.innerText = 'Menghitung total baris data...';
-                            elements.bar.style.width = '5%';
                         } else if (data.status === 'processing') {
-                            if (elements.status) elements.status.innerText = 'Mengimport data... ' + displayPercentage + '%';
+                            if (elements.status) elements.status.innerText = 'Sedang mengimport... (' + processedCount + ' baris)';
                             if (elements.details) {
-                                let details = `${data.processed} dari ${data.total} baris tersimpan`;
-                                if (data.processed > 0) {
-                                    details += ' (Sedang berjalan)';
-                                } else {
-                                    details += ' (Memulai...)';
+                                let details = `Sudah ${processedCount} baris berhasil diimport`;
+                                if (totalCount > 0) {
+                                    details += ` dari ${totalCount} baris`;
                                 }
                                 elements.details.innerText = details;
                             }

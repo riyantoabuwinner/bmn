@@ -9,14 +9,14 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\SkipsEmptyRows;
 use Illuminate\Support\Collection;
 
-class CurrentAssetsImport implements ToCollection, WithHeadingRow, WithChunkReading, \Maatwebsite\Excel\Concerns\WithEvents, \Illuminate\Contracts\Queue\ShouldQueue
+class CurrentAssetsImport implements ToCollection, WithHeadingRow, WithChunkReading, \Maatwebsite\Excel\Concerns\WithEvents, \Maatwebsite\Excel\Concerns\SkipsEmptyRows, \Maatwebsite\Excel\Concerns\WithColumnLimit, \Illuminate\Contracts\Queue\ShouldQueue
 {
     public $importTaskId;
 
     public function __construct($importTaskId)
     {
         $this->importTaskId = $importTaskId;
-        ini_set('memory_limit', '2G');
+        ini_set('memory_limit', '1G');
         set_time_limit(0);
     }
 
@@ -61,7 +61,12 @@ class CurrentAssetsImport implements ToCollection, WithHeadingRow, WithChunkRead
 
     public function chunkSize(): int
     {
-        return 500;
+        return 100;
+    }
+
+    public function endColumn(): string
+    {
+        return 'BZ';
     }
 
     public function registerEvents(): array
@@ -73,12 +78,7 @@ class CurrentAssetsImport implements ToCollection, WithHeadingRow, WithChunkRead
                     'total_rows' => 0
                 ]);
                 
-                try {
-                    $totalRows = array_values($event->reader->getTotalRows())[0] - 1;
-                    \App\Models\ImportTask::where('id', $this->importTaskId)->update([
-                        'total_rows' => $totalRows > 0 ? $totalRows : 0
-                    ]);
-                } catch (\Exception $e) {}
+                // REMOVED getTotalRows() to save memory
             },
             \Maatwebsite\Excel\Events\AfterImport::class => function (\Maatwebsite\Excel\Events\AfterImport $event) {
                 \App\Models\ImportTask::where('id', $this->importTaskId)->update(['status' => 'completed']);
