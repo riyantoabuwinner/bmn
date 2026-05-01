@@ -10,7 +10,7 @@ class SystemUpdateController extends Controller
 {
     public function index()
     {
-        $status = $this->getGitStatus();
+        $status = $this->getLocalStatus();
         $logs = $this->getGitLogs();
         
         return view('system.update', compact('status', 'logs'));
@@ -69,23 +69,39 @@ class SystemUpdateController extends Controller
         ]);
     }
 
-    private function getGitStatus()
+    private function getLocalStatus()
     {
         try {
             $branch = trim(\Illuminate\Support\Facades\Process::run('git rev-parse --abbrev-ref HEAD')->output() ?: 'unknown');
             $hash = trim(\Illuminate\Support\Facades\Process::run('git rev-parse --short HEAD')->output() ?: 'unknown');
             $date = trim(\Illuminate\Support\Facades\Process::run('git log -1 --format=%cd --date=relative')->output() ?: 'unknown');
             
-            // Check if we are behind origin
-            $behindCount = trim(\Illuminate\Support\Facades\Process::run('git rev-list HEAD..origin/main --count')->output() ?: '0');
-            $behindCount = (int)$behindCount;
-
             return [
                 'branch' => $branch,
                 'hash' => $hash,
                 'date' => $date,
-                'behind' => $behindCount
+                'behind' => 0 // Always 0 on initial load to avoid accidental triggers
             ];
+        } catch (\Exception $e) {
+            return [
+                'branch' => 'Error',
+                'hash' => 'Error',
+                'date' => 'Error',
+                'behind' => 0
+            ];
+        }
+    }
+
+    private function getGitStatus()
+    {
+        try {
+            $status = $this->getLocalStatus();
+            
+            // Check if we are behind origin
+            $behindCount = trim(\Illuminate\Support\Facades\Process::run('git rev-list HEAD..origin/main --count')->output() ?: '0');
+            $status['behind'] = (int)$behindCount;
+
+            return $status;
         } catch (\Exception $e) {
             \Log::error("Git Status Error: " . $e->getMessage());
             return [
