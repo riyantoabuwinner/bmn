@@ -73,19 +73,34 @@ class SystemUpdateController extends Controller
 
     private function getGitCommand()
     {
+        // Try to find git dynamically first
+        $dynamicOutput = trim(shell_exec('where git') ?? '');
+        if (!empty($dynamicOutput)) {
+            $paths = explode("\n", $dynamicOutput);
+            foreach ($paths as $p) {
+                $p = trim($p);
+                if (!empty($p) && file_exists($p)) {
+                    return '"' . $p . '"';
+                }
+            }
+        }
+
         // Try common paths for Windows if 'git' isn't found in PATH
         $commonPaths = [
             'git', // Default in PATH
             'C:\Program Files\Git\cmd\git.exe',
             'C:\Program Files\Git\bin\git.exe',
+            'C:\Program Files (x86)\Git\cmd\git.exe',
+            'C:\Program Files (x86)\Git\bin\git.exe',
             '/usr/bin/git',
             '/usr/local/bin/git'
         ];
 
         foreach ($commonPaths as $path) {
-            $process = \Illuminate\Support\Facades\Process::run("$path --version");
+            $testPath = (str_contains($path, ' ')) ? '"' . $path . '"' : $path;
+            $process = \Illuminate\Support\Facades\Process::run("$testPath --version");
             if ($process->successful()) {
-                return $path;
+                return $testPath;
             }
         }
 
