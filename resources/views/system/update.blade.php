@@ -84,99 +84,101 @@
 
 @section('js')
 <script>
-        let systemUpToDate = false;
+$(document).ready(function() {
+    let systemUpToDate = false;
 
-        $('#btnCheck').click(function() {
-            const btn = $(this);
-            btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Mengecek...');
-            systemUpToDate = false;
-            
-            $.post('{{ route("system.update.check") }}', {
-                _token: '{{ csrf_token() }}'
-            })
-            .done(function(data) {
-                if (data.success) {
-                    $('#statusInfo').html(`
-                        <span class="mr-4 text-sm">Branch: <strong>${data.status.branch}</strong></span>
-                        <span class="mr-4 text-sm">Hash: <strong>${data.status.hash}</strong></span>
-                        <span class="text-sm">Tanggal: <strong>${data.status.date}</strong></span>
-                    `);
-                    
-                    if (data.status.behind > 0) {
-                        $('#behindCount').text(data.status.behind);
-                        $('#updateAlert').show();
-                        $('#noUpdateAlert').hide();
-                        $('#btnUpdate').show();
-                        systemUpToDate = false;
-                    } else {
-                        $('#updateAlert').hide();
-                        $('#noUpdateAlert').show();
-                        $('#btnUpdate').hide();
-                        systemUpToDate = true;
-                        toastr.success('Sistem sudah menggunakan versi terbaru.');
-                    }
-                    
-                    if (data.has_migrations) {
-                        $('#migrationAlert').show();
-                    } else {
-                        $('#migrationAlert').hide();
-                    }
-                    
-                    // Update logs
-                    let logHtml = '';
-                    if (data.logs && Array.isArray(data.logs)) {
-                        data.logs.forEach(function(log) {
-                            logHtml += log + '\n';
-                        });
-                    }
-                    $('.bg-dark:eq(0)').text(logHtml || 'Tidak ada riwayat perubahan.');
-                    
-                    $('#executionOutput').text(data.output || 'Pengecekan selesai. ' + (data.status.behind > 0 ? 'Pembaruan tersedia.' : 'Sistem up-to-date.'));
+    $('#btnCheck').click(function() {
+        const btn = $(this);
+        btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Mengecek...');
+        systemUpToDate = false;
+        
+        $.post('{{ route("system.update.check") }}', {
+            _token: '{{ csrf_token() }}'
+        })
+        .done(function(data) {
+            if (data.success) {
+                $('#statusInfo').html(
+                    '<span class="mr-4 text-sm">Branch: <strong>' + data.status.branch + '</strong></span>' +
+                    '<span class="mr-4 text-sm">Hash: <strong>' + data.status.hash + '</strong></span>' +
+                    '<span class="text-sm">Tanggal: <strong>' + data.status.date + '</strong></span>'
+                );
+                
+                if (data.status.behind > 0) {
+                    $('#behindCount').text(data.status.behind);
+                    $('#updateAlert').show();
+                    $('#noUpdateAlert').hide();
+                    $('#btnUpdate').show();
+                    systemUpToDate = false;
                 } else {
-                    toastr.error(data.message || 'Gagal mengecek pembaruan.');
-                    $('#executionOutput').text(data.output || 'Gagal mengecek pembaruan. Pastikan git terinstal dan dapat diakses.');
+                    $('#updateAlert').hide();
+                    $('#noUpdateAlert').show();
+                    $('#btnUpdate').hide();
+                    systemUpToDate = true;
+                    toastr.success('Sistem sudah menggunakan versi terbaru.');
                 }
-            })
-            .fail(function() {
-                toastr.error('Gagal menghubungi server.');
-            })
-            .always(function() {
-                if (systemUpToDate) {
-                    btn.prop('disabled', true).html('<i class="fas fa-check mr-1"></i> Terverifikasi Terbaru');
+                
+                if (data.has_migrations) {
+                    $('#migrationAlert').show();
                 } else {
-                    btn.prop('disabled', false).html('<i class="fas fa-search mr-1"></i> Cek Pembaruan');
+                    $('#migrationAlert').hide();
                 }
-            });
-        });
-
-        $('#btnUpdate').click(function() {
-            if (!confirm('Apakah Anda yakin ingin memperbarui sistem? Ini akan menjalankan perintah git pull.')) return;
-            
-            const btn = $(this);
-            btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Memperbarui...');
-            
-            $.post('{{ route("system.update.apply") }}', {
-                _token: '{{ csrf_token() }}'
-            })
-            .done(function(data) {
-                $('#executionOutput').text(data.output);
-                if (data.success) {
-                    toastr.success(data.message);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 2000);
-                } else {
-                    toastr.error(data.message);
+                
+                // Update logs
+                var logHtml = '';
+                if (data.logs && Array.isArray(data.logs)) {
+                    data.logs.forEach(function(log) {
+                        logHtml += log + '\n';
+                    });
                 }
-            })
-            .fail(function() {
-                toastr.error('Gagal memperbarui sistem.');
-            })
-            .always(function() {
-                btn.prop('disabled', false).html('<i class="fas fa-sync-alt mr-1"></i> Perbarui Sistem');
-            });
+                $('.bg-dark:eq(0)').text(logHtml || 'Tidak ada riwayat perubahan.');
+                
+                $('#executionOutput').text(data.output || 'Pengecekan selesai. ' + (data.status.behind > 0 ? 'Pembaruan tersedia.' : 'Sistem up-to-date.'));
+            } else {
+                toastr.error(data.message || 'Gagal mengecek pembaruan.');
+                $('#executionOutput').text(data.output || 'Gagal mengecek pembaruan. Pastikan git terinstal dan dapat diakses.');
+            }
+        })
+        .fail(function(xhr) {
+            toastr.error('Gagal menghubungi server. Status: ' + xhr.status);
+            $('#executionOutput').text('Error: Gagal menghubungi server. HTTP Status: ' + xhr.status);
+        })
+        .always(function() {
+            if (systemUpToDate) {
+                btn.prop('disabled', true).html('<i class="fas fa-check mr-1"></i> Terverifikasi Terbaru');
+            } else {
+                btn.prop('disabled', false).html('<i class="fas fa-search mr-1"></i> Cek Pembaruan');
+            }
         });
     });
+
+    $('#btnUpdate').click(function() {
+        if (!confirm('Apakah Anda yakin ingin memperbarui sistem? Ini akan menjalankan perintah git pull.')) return;
+        
+        const btn = $(this);
+        btn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin mr-1"></i> Memperbarui...');
+        
+        $.post('{{ route("system.update.apply") }}', {
+            _token: '{{ csrf_token() }}'
+        })
+        .done(function(data) {
+            $('#executionOutput').text(data.output);
+            if (data.success) {
+                toastr.success(data.message);
+                setTimeout(function() {
+                    location.reload();
+                }, 2000);
+            } else {
+                toastr.error(data.message);
+            }
+        })
+        .fail(function() {
+            toastr.error('Gagal memperbarui sistem.');
+        })
+        .always(function() {
+            btn.prop('disabled', false).html('<i class="fas fa-sync-alt mr-1"></i> Perbarui Sistem');
+        });
+    });
+});
 </script>
 @stop
 
